@@ -1,1 +1,0 @@
-# snipets-app1
