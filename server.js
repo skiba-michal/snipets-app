@@ -2,20 +2,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
-console.log("try");
-
 
 app.use(express.static(path.join("public")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  // res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); mozna wyjebac
+  // res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
 
-app.get("/about", function (req, res) {
-  console.log("eloooo");
+app.get("/api/about", function (req, res) {
   res.send(JSON.stringify("abouttttt"));
 });
 
