@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const bodyParser = require('body-parser')
 const app = express();
+
+app.use(bodyParser.json())
 
 app.use(express.static(path.join("public")));
 
@@ -16,9 +19,13 @@ app.get("/api/about", function (req, res) {
   res.send(JSON.stringify("abouttttt"));
 });
 
+
 app.use((req, res, next) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
+
+
+
 
 mongoose
   .connect(
