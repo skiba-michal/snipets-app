@@ -15,7 +15,7 @@ app.use((_, res, next) => {
 });
 
 app.get("/api/about", (_, res) => {
-  res.send(JSON.stringify("abouttttt"));
+  res.send(JSON.stringify("abouttttttt2"));
 });
 
 app.use(todosRoutes);

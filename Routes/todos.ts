@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ToDo } from "../Models/todo";
 
-let todos: ToDo[] = [{ id: "ajdi", text: "to do 1" }];
+let todos: ToDo[] = [{ id: "ajdi", text: "to do 12" }];
 
 const router = Router();
 
