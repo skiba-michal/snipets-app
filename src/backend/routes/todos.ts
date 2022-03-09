@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ToDo } from "../Models/todo";
+import { ToDo } from "../models/todo";
 
 let todos: ToDo[] = [{ id: "ajdi", text: "to do 12" }];
 

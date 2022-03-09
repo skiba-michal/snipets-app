@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 import bodyParser from "body-parser";
-import todosRoutes from "./Routes/todos";
+import todosRoutes from "./src/backend/routes/todos";
 
 const app = express();
 app.use(bodyParser.json());

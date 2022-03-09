@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-let todos = [{ id: "ajdi", text: "to do 1" }];
+let todos = [{ id: "ajdi", text: "to do 12" }];
 const router = (0, express_1.Router)();
 router.get("/api/todos", (req, res, next) => {
     res.status(200).json({ todos: todos });
