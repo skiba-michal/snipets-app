@@ -1,10 +1,14 @@
+import "module-alias/register";
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 import bodyParser from "body-parser";
 import todosRoutes from "./src/backend/routes/todos";
+import authRoutes from "@api/auth/auth";
+import { errorHandler } from "@middlewares/index";
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(express.static(path.join("public")));
 
@@ -19,6 +23,9 @@ app.get("/api/about", (_, res) => {
 });
 
 app.use(todosRoutes);
+app.use(authRoutes);
+
+app.use(errorHandler);
 
 app.use((_, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
@@ -31,4 +38,4 @@ mongoose
   .then(() => {
     app.listen(process.env.PORT);
   })
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));

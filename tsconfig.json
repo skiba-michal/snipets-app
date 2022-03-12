@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@api/*": ["backend/api/*"],
+      "@utils/*": ["backend/utils/*"],
+      "@middlewares/*": ["backend/middlewares/*"]
+    },
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -8,5 +14,6 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "outDir": "./dist"
-  }
+  },
+  "exclude": ["./src/client"]
 }
