@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   },
   permissions: {
     type: Array,
-    required: true,
+    default: [],
   },
 });
 

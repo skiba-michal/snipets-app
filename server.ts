@@ -15,15 +15,16 @@ app.use(express.static(path.join("public")));
 app.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
 
 app.get("/api/about", (_, res) => {
-  res.send(JSON.stringify("abouttttttt2"));
+  res.send(JSON.stringify("abouttttttt3"));
 });
 
-app.use(todosRoutes);
-app.use(authRoutes);
+app.use("/api", todosRoutes);
+app.use("/api", authRoutes);
 
 app.use(errorHandler);
 

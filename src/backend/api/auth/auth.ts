@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { body } from "express-validator/check";
+import { body } from "express-validator";
+import { validationMessages } from "@utils/messages";
 import { login } from "./auth.controller";
-import { validationMessages } from "@utils/errorMessages";
 import { UserModel } from "./auth.model";
 import { signup } from "./auth.controller";
 
 const router = Router();
 
-router.post("/api/login", login);
+router.post("/login", login);
 router.post(
-  "/api/signup",
+  "/signup",
   [
     body("email")
       .isEmail()

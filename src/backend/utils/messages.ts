@@ -5,3 +5,13 @@ export const validationMessages = Object.freeze({
   isRequired: "Value is required.",
   validationFailed: "Validation failed.",
 });
+
+export const errorMessages = Object.freeze({
+  userNotFound: "A yser with this email could not be found.",
+  wrongPassword: "Wrong password.",
+  notAuthenticated: "Not authenticated.",
+})
+
+export const succesMessages = Object.freeze({
+  userCreated: "User created!",
+});

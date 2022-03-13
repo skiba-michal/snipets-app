@@ -1,0 +1,6 @@
+@import "scss-reset/_reset.scss";
+@import "./styles/colors";
+
+p {
+  color: $base-color;
+}
