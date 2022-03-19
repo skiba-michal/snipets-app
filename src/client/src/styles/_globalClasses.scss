@@ -1,0 +1,57 @@
+body {
+  background: $primary-color;
+  color: $font-primary-color;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.display-none {
+  display: none;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.full-screen-component-wrapper {
+  @include full-screen;
+}
+
+.card-wrapper {
+  padding: $section-space-medium $section-space-small;
+  @include primary-border-shadow;
+}
+
+.section-title {
+  font-size: $font-big;
+  text-align: center;
+  margin-bottom: $section-space-medium;
+}
+
+.display-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-margin {
+  margin-top: $section-space-medium;
+}
+
+.display-row {
+  display: flex;
+}
+
+.left-position {
+  margin-right: auto !important;
+}
+
+.right-position {
+  margin-left: auto !important;
+}
+
+.center-position {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

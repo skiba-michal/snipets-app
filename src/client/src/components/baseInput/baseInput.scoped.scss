@@ -1,0 +1,46 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+.mui-input-underline {
+  color: $font-primary-color !important;
+  background: $secondary-color !important;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+.mui-input-underline:not(.mui-input-error) {
+  &::before {
+    border-bottom: 2px solid $border-color !important;
+  }
+  &::after {
+    border-bottom: 2px solid $focus-color !important;
+  }
+}
+
+.mui-input-error::before {
+  border-bottom: 2px solid $error-color !important;
+}
+
+.mui-label-root {
+  color: $font-primary-color !important;
+  left: -14px !important;
+}
+
+.mui-label-focused {
+  color: $font-primary-color !important;
+}
+
+.input-adornment-start {
+  margin-right: 5px;
+  @include center;
+  padding: 5px;
+  svg {
+    font-size: $icon-size;
+  }
+}
+
+.form-control-wrapper {
+  width: 280px;
+  margin: 15px 10px;
+}

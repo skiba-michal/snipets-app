@@ -1,0 +1,9 @@
+@import "@styles/colors";
+@import "@styles/mixins";
+
+.loading-icon-wrapper {
+  @include center;
+  span {
+    color: $font-primary-color;
+  }
+}

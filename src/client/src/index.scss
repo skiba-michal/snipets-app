@@ -1,6 +1,6 @@
 @import "scss-reset/_reset.scss";
-@import "./styles/colors";
-
-p {
-  color: $base-color;
-}
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mediaQueries";
+@import "@styles/mixins";
+@import "@styles/globalClasses";

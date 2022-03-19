@@ -1,0 +1,24 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin full-screen {
+  @include center;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+@mixin primary-border {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+}
+
+@mixin primary-border-shadow {
+  @include primary-border;
+  box-shadow: 8px 7px 15px -10px $shadow-color;
+}

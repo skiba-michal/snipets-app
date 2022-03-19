@@ -2,10 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
+      "@components": ["components/index"],
+      "@util*": ["utils/index"],
       "@store/*": ["store/*"],
-      "@const/*": ["const/*"],
+      "@const": ["const/index"],
+      "@styles/*": ["styles/*"],
+      "@interfaces": ["interfaces/index"],
       "@models/*": ["../backend/models/*"]
     },
     "jsx": "react",
