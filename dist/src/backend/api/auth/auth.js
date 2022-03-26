@@ -11,24 +11,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const express_validator_1 = require("express-validator");
-const messages_1 = require("@utils/messages");
+const _utils_1 = require("@utils");
 const auth_controller_1 = require("./auth.controller");
 const auth_model_1 = require("./auth.model");
 const auth_controller_2 = require("./auth.controller");
 const router = (0, express_1.Router)();
-router.post("login", auth_controller_1.login);
-router.post("signup", [
-    (0, express_validator_1.body)("email")
-        .isEmail()
-        .withMessage(messages_1.validationMessages.invalidEmail)
+router.post("/login", (req, b, c) => (0, auth_controller_1.login)(req, b, c));
+router.post("/signup", [
+    (0, express_validator_1.body)("login")
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage(_utils_1.validationMessages.toShortLogin)
         .custom((value) => __awaiter(void 0, void 0, void 0, function* () {
-        const userDoc = yield auth_model_1.UserModel.findOne({ email: value });
+        const userDoc = yield auth_model_1.UserModel.findOne({ login: value });
         if (userDoc) {
-            return Promise.reject(messages_1.validationMessages.emailExist);
+            return Promise.reject(_utils_1.validationMessages.loginExist);
         }
-    }))
-        .normalizeEmail(),
-    (0, express_validator_1.body)("password").trim().isLength({ min: 6 }).withMessage(messages_1.validationMessages.toShortPassword),
-    (0, express_validator_1.body)("name").trim().not().isEmpty().withMessage(messages_1.validationMessages.isRequired),
+    })),
+    (0, express_validator_1.body)("password").trim().isLength({ min: 6 }).withMessage(_utils_1.validationMessages.toShortPassword),
+    (0, express_validator_1.body)("name").trim().not().isEmpty().withMessage(_utils_1.validationMessages.isRequired),
+    (0, express_validator_1.body)("secretKey").custom((value) => __awaiter(void 0, void 0, void 0, function* () {
+        if (value !== process.env.SECRET_KEY) {
+            return Promise.reject(_utils_1.validationMessages.secretKeyIsInvalid);
+        }
+    })),
 ], auth_controller_2.signup);
 exports.default = router;

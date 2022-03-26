@@ -2,17 +2,16 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
-import { validationMessages, succesMessages, errorMessages } from "@utils/messages";
-import { RequestError } from "@utils/interfaces";
-import { User, UserLoginData } from "./auth.interface";
+import { validationMessages, succesMessages, errorMessages } from "@utils";
+import { User, UserLoginData, RequestError } from "@models";
 import { UserModel } from "./auth.model";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const body = req.body as UserLoginData;
-  const email = body.email;
+  const login = body.login;
   const password = body.password;
   let loadedUser: User;
-  UserModel.findOne({ email })
+  UserModel.findOne({ login })
     .then(user => {
       if (!user) {
         const error: RequestError = new Error(errorMessages.userNotFound);
@@ -29,7 +28,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
         throw error;
       }
       const userId = loadedUser._id ? loadedUser._id.toString() : "";
-      const token = jwt.sign({ email: loadedUser.email, userId: userId }, process.env.HASH_KEY, { expiresIn: "2h" });
+      const token = jwt.sign({ login: loadedUser.login, userId: userId }, process.env.HASH_KEY, { expiresIn: "2h" });
       res.status(200).json({ token, userId });
     })
     .catch(err => {
@@ -48,15 +47,16 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
     error.data = errors.array();
     throw error;
   }
+
   const body = req.body as User;
-  const email = body.email;
+  const login = body.login;
   const name = body.name;
   const password = body.password;
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {
       const user = new UserModel({
-        email,
+        login,
         name,
         password: hashedPassword,
       });

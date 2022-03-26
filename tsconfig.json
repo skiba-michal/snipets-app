@@ -3,8 +3,9 @@
     "baseUrl": "src",
     "paths": {
       "@api/*": ["backend/api/*"],
-      "@utils/*": ["backend/utils/*"],
-      "@middlewares/*": ["backend/middlewares/*"]
+      "@utils": ["backend/utils/index"],
+      "@middlewares/*": ["backend/middlewares/*"],
+      "@models": ["client/models/index"]
     },
     "target": "es6",
     "module": "commonjs",

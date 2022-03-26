@@ -11,6 +11,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const todos_1 = __importDefault(require("./src/backend/routes/todos"));
 const auth_1 = __importDefault(require("@api/auth/auth"));
 const index_1 = require("@middlewares/index");
+const _utils_1 = require("@utils");
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.use(express_1.default.static(path_1.default.join("public")));
@@ -20,16 +21,17 @@ app.use((_, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
 });
-app.get("/api/about", (_, res) => {
-    res.send(JSON.stringify("abouttttttt3"));
+app.use("/api", auth_1.default);
+app.use("/api", todos_1.default);
+app.use("/api/*", () => {
+    const error = new Error(_utils_1.errorMessages.notFound);
+    error.statusCode = 404;
+    throw error;
 });
-app.use("/api/", todos_1.default);
-app.use("/api/", auth_1.default);
-app.use(index_1.errorHandler);
 app.use((_, res) => {
     res.sendFile(path_1.default.resolve(__dirname, "public", "index.html"));
 });
-// req, res, next
+app.use(index_1.errorHandler);
 mongoose_1.default
     .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.0unqv.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
     .then(() => {

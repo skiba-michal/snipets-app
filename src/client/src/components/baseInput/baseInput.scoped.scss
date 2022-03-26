@@ -40,6 +40,22 @@
   }
 }
 
+.Mui-focused {
+  .input-adornment-start {
+    svg {
+      fill: $focus-color;
+    }
+  }
+}
+
+.MuiFormHelperText-root {
+  position: absolute;
+  top: 50px;
+  font-size: $font-extra-small;
+  margin: 0;
+  max-width: 100%;
+}
+
 .form-control-wrapper {
   width: 280px;
   margin: 15px 10px;

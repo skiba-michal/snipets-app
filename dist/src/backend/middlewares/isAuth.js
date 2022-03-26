@@ -5,12 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAuth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const messages_1 = require("@utils/messages");
-const typeCheckers_1 = require("@utils/typeCheckers");
+const _utils_1 = require("@utils");
 const isAuth = (req, res, next) => {
-    const authorization = req.get("Authorization").split(" ");
-    if (authorization.length < 1) {
-        throw new Error(messages_1.errorMessages.invalidToken);
+    var _a;
+    const authorization = (_a = req.get("Authorization")) === null || _a === void 0 ? void 0 : _a.split(" ");
+    if (!authorization || authorization.length < 1) {
+        const error = new Error(_utils_1.errorMessages.notAuthenticated);
+        error.statusCode = 401;
+        throw error;
     }
     const token = authorization[1];
     let decodedToken;
@@ -22,11 +24,11 @@ const isAuth = (req, res, next) => {
         throw err;
     }
     if (!decodedToken) {
-        const error = new Error(messages_1.errorMessages.notAuthenticated);
+        const error = new Error(_utils_1.errorMessages.notAuthenticated);
         error.statusCode = 401;
         throw error;
     }
-    if ((0, typeCheckers_1.isJwtPayload)(decodedToken)) {
+    if ((0, _utils_1.isJwtPayload)(decodedToken)) {
         req.userId = decodedToken.userId;
     }
     next();

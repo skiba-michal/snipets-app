@@ -8,5 +8,5 @@ export enum PositionEnum {
   LEFT = "left-position",
   RIGHT = "right-position",
   CENTER = "center-position",
-  UNSET = '',
+  UNSET = "",
 }

@@ -6,12 +6,14 @@ import bodyParser from "body-parser";
 import todosRoutes from "./src/backend/routes/todos";
 import authRoutes from "@api/auth/auth";
 import { errorHandler } from "@middlewares/index";
+import { RequestError } from "@models";
+import { errorMessages } from "@utils";
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join("public")));
-
+console.log('text')
 app.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
@@ -19,19 +21,21 @@ app.use((_, res, next) => {
   next();
 });
 
-app.get("/api/about", (_, res) => {
-  res.send(JSON.stringify("abouttttttt3"));
-});
-
-app.use("/api", todosRoutes);
 app.use("/api", authRoutes);
+app.use("/api", todosRoutes);
 
-app.use(errorHandler);
+app.use("/api/*", () => {
+  const error: RequestError = new Error(errorMessages.notFound);
+  error.statusCode = 404;
+  throw error;
+});
 
 app.use((_, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
-// req, res, next
+
+app.use(errorHandler);
+
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.0unqv.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`

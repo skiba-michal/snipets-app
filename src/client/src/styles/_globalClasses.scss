@@ -21,6 +21,7 @@ body {
 
 .card-wrapper {
   padding: $section-space-medium $section-space-small;
+  margin: $margin-medium;
   @include primary-border-shadow;
 }
 
@@ -30,17 +31,29 @@ body {
   margin-bottom: $section-space-medium;
 }
 
+.section-margin {
+  margin-top: $section-space-medium;
+}
+
 .display-column {
   display: flex;
   flex-direction: column;
 }
 
-.section-margin {
-  margin-top: $section-space-medium;
-}
-
 .display-row {
   display: flex;
+}
+
+.display-row-center-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display-row-bottom-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .left-position {
@@ -54,4 +67,8 @@ body {
 .center-position {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+.mui-input {
+  padding: 5px !important;
 }

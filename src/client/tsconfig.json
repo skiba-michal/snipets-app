@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@components": ["components/index"],
-      "@util*": ["utils/index"],
-      "@store/*": ["store/*"],
-      "@const": ["const/index"],
-      "@styles/*": ["styles/*"],
-      "@interfaces": ["interfaces/index"],
-      "@models/*": ["../backend/models/*"]
+      "@components": ["src/components/index"],
+      "@util*": ["src/utils/index"],
+      "@store/*": ["src/store/*"],
+      "@const": ["src/const/index"],
+      "@styles/*": ["src/styles/*"],
+      "@interfaces": ["src/interfaces/index"],
+      "@models": ["models/index"]
     },
     "jsx": "react",
     "target": "es6",

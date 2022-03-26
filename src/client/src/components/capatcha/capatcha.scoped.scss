@@ -1,0 +1,16 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+.capatcha-wrapper {
+  margin-left: 10px;
+}
+
+.form-place-till {
+  background: $secondary-color;
+  height: 36px;
+  width: 40px;
+  @include center;
+  margin-top: 12px;
+  font-size: $font-big;
+}

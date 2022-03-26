@@ -1,8 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Response, NextFunction } from "express";
-import { AuthRequest, RequestError } from "@utils/interfaces";
-import { errorMessages } from "@utils/messages";
-import { isJwtPayload } from "@utils/typeCheckers";
+import { AuthRequest, RequestError } from "@models";
+import { errorMessages, isJwtPayload } from "@utils";
 
 export const isAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
   const authorization = req.get("Authorization")?.split(" ");

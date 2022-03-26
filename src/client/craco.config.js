@@ -14,7 +14,7 @@ module.exports = {
       "@const": resolve(__dirname, "src/const"),
       "@styles": resolve(__dirname, "src/styles/"),
       "@interfaces": resolve(__dirname, "src/interfaces"),
-      "@models": resolve(__dirname, "../backend/models"),
+      "@models": resolve(__dirname, "models"),
     },
   },
 };

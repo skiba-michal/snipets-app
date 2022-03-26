@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const isAuth_1 = require("../middlewares/isAuth");
 let todos = [{ id: "ajdi", text: "to do 12" }];
 const router = (0, express_1.Router)();
-// isAuth test
-router.get("todos", (req, res, next) => {
+router.get("/todos", (req, res, next) => {
     res.status(200).json({ todos: todos });
 });
-router.post("todos", (req, res, next) => {
+router.post("/todos", isAuth_1.isAuth, (req, res, next) => {
     const body = req.body;
     const newToDo = { id: new Date().toISOString(), text: body.text };
     todos.push(newToDo);

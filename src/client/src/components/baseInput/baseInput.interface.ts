@@ -1,26 +1,26 @@
-import { SvgIconTypeMap } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { MaterialIcon } from "@interfaces";
 import { ChangeEvent } from "react";
 
 export interface ValidationSettings {
-  minLength: number;
-  maxLength: number;
+  minLength?: number;
+  maxLength?: number;
+  isRequired?: boolean;
 }
 
 export interface InputProps {
   value: string | number;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  setErrorParrent?: (value: boolean) => void;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+  customErrorMessage?: string;
   showErrors?: boolean;
   label?: string;
   disabled?: boolean;
-  error?: boolean;
   fullWidth?: boolean;
   placeholder?: string;
-  onChange?: (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
   type?: string;
   validationSettings?: ValidationSettings;
   multiline?: boolean;
-  Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
-    muiName: string;
-  };
+  Icon?: MaterialIcon;
+  width?: number;
 }

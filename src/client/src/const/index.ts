@@ -1,1 +1,1 @@
-export { inputErrors } from './inputErrors';
+export { inputErrors } from "./inputErrors";
