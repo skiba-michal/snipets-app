@@ -32,7 +32,16 @@ const login = (req, res, next) => {
         }
         const userId = loadedUser._id ? loadedUser._id.toString() : "";
         const token = jsonwebtoken_1.default.sign({ login: loadedUser.login, userId: userId }, process.env.HASH_KEY, { expiresIn: "2h" });
-        res.status(200).json({ token, userId });
+        const response = {
+            message: _utils_1.succesMessages.logedIn,
+            data: {
+                name: loadedUser.name,
+                token: token,
+                permissions: loadedUser.permissions,
+                id: userId,
+            },
+        };
+        res.status(200).json(response);
     })
         .catch(err => {
         if (!err.statusCode) {
@@ -64,8 +73,11 @@ const signup = (req, res, next) => {
         });
         return user.save();
     })
-        .then(result => {
-        res.status(201).json({ message: _utils_1.succesMessages.userCreated, userData: result });
+        .then(() => {
+        const response = {
+            message: _utils_1.succesMessages.userCreated,
+        };
+        res.status(201).json(response);
     })
         .catch(err => {
         if (!err.statusCode) {

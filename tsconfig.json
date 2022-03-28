@@ -4,7 +4,7 @@
     "paths": {
       "@api/*": ["backend/api/*"],
       "@utils": ["backend/utils/index"],
-      "@middlewares/*": ["backend/middlewares/*"],
+      "@middlewares": ["backend/middlewares/index"],
       "@models": ["client/models/index"]
     },
     "target": "es6",
@@ -16,5 +16,8 @@
     "skipLibCheck": true,
     "outDir": "./dist"
   },
-  "exclude": ["./src/client"]
+  "exclude": ["./src/client"],
+  "ts-node": {
+    "transpileOnly": true
+  }
 }

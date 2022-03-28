@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import { validationMessages, succesMessages, errorMessages } from "@utils";
-import { User, UserLoginData, RequestError } from "@models";
+import { User, UserLoginData, RequestError, RequestResponse } from "@models";
 import { UserModel } from "./auth.model";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
@@ -11,6 +11,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
   const login = body.login;
   const password = body.password;
   let loadedUser: User;
+
   UserModel.findOne({ login })
     .then(user => {
       if (!user) {
@@ -29,7 +30,18 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
       }
       const userId = loadedUser._id ? loadedUser._id.toString() : "";
       const token = jwt.sign({ login: loadedUser.login, userId: userId }, process.env.HASH_KEY, { expiresIn: "2h" });
-      res.status(200).json({ token, userId });
+
+      const response: RequestResponse = {
+        message: succesMessages.logedIn,
+        data: {
+          name: loadedUser.name,
+          token: token,
+          permissions: loadedUser.permissions,
+          id: userId,
+        },
+      };
+
+      res.status(200).json(response);
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -52,6 +64,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
   const login = body.login;
   const name = body.name;
   const password = body.password;
+
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {
@@ -62,8 +75,11 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
       });
       return user.save();
     })
-    .then(result => {
-      res.status(201).json({ message: succesMessages.userCreated, userData: result });
+    .then(() => {
+      const response: RequestResponse = {
+        message: succesMessages.userCreated,
+      };
+      res.status(201).json(response);
     })
     .catch(err => {
       if (!err.statusCode) {

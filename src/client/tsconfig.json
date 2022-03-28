@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@components": ["src/components/index"],
-      "@util*": ["src/utils/index"],
+      "@utils": ["src/utils/index"],
       "@store/*": ["src/store/*"],
       "@const": ["src/const/index"],
       "@styles/*": ["src/styles/*"],
@@ -17,6 +17,5 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
-    "skipLibCheck": true
   }
 }

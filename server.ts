@@ -5,15 +5,15 @@ import path from "path";
 import bodyParser from "body-parser";
 import todosRoutes from "./src/backend/routes/todos";
 import authRoutes from "@api/auth/auth";
-import { errorHandler } from "@middlewares/index";
 import { RequestError } from "@models";
 import { errorMessages } from "@utils";
+import { errorHandler } from "@middlewares";
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join("public")));
-console.log('text')
+
 app.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
@@ -24,7 +24,7 @@ app.use((_, res, next) => {
 app.use("/api", authRoutes);
 app.use("/api", todosRoutes);
 
-app.use("/api/*", () => {
+app.all("/api/*", () => {
   const error: RequestError = new Error(errorMessages.notFound);
   error.statusCode = 404;
   throw error;

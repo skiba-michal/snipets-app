@@ -1,21 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserMessage } from "@interfaces";
 import { fetchAccountProfile } from "./user.thunks";
 
-export interface IUserProfile {
-  username: string;
-  language: string;
+export interface UserStorData {
+  userName: string;
+  account: {};
+  userMessage: UserMessage;
 }
 
-export const userProfileSlice = createSlice({
-  name: "userProfile",
+export const userData = createSlice({
+  name: "userData",
   initialState: {
-    username: "",
-    language: "en",
+    userName: "",
+    userMessage: {
+      type: null,
+      message: null,
+    },
     account: {},
   },
   reducers: {
-    setName: (state: IUserProfile, action: PayloadAction<string>) => {
-      state.username = action.payload;
+    setUserMessage: (state: UserStorData, action: PayloadAction<UserMessage>) => {
+      state.userMessage = action.payload;
     },
   },
   extraReducers: builder => {
@@ -25,5 +30,5 @@ export const userProfileSlice = createSlice({
   },
 });
 
-export type UserProfileState = ReturnType<typeof userProfileSlice.reducer>;
-export const { setName } = userProfileSlice.actions;
+export type UserStoreData = ReturnType<typeof userData.reducer>;
+export const { setUserMessage } = userData.actions;

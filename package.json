@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc",
     "start": "node dist/server.js",
-    "start:dev": "nodemon --exec ts-node server.ts",
+    "start:dev": "concurrently \"nodemon --exec ts-node server.ts\" \"tsc -w\"",
     "start:front": "cd src && cd client && npm start",
     "predeploy": "concurrently \"cd src && cd client && npm craco build\" \"tsc\""
   },
@@ -40,7 +41,7 @@
   "_moduleAliases": {
     "@api": "dist/src/backend/api",
     "@utils": "dist/src/backend/utils/index",
-    "@middlewares": "dist/src/backend/middlewares",
+    "@middlewares": "dist/src/backend/middlewares/index",
     "@models": "dist/src/backend/models/index"
   }
 }

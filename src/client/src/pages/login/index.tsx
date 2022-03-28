@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import LoginIcon from "@mui/icons-material/Login";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BaseInput, FormWrapper, BaseButton, Capatcha, CapatchaHandleRef } from "@components";
 import { PositionEnum } from "@interfaces";
+import { RequestResponse, UserLoginData } from "@models";
+import { httpClient } from "@utils";
+import { apiUrls } from "@const";
 import "./login.scoped.scss";
 
 const LoginPage = () => {
@@ -24,8 +27,25 @@ const LoginPage = () => {
     const isFormValid = isValid();
     if (isFormValid) {
       setLoading(true);
+      const userData: UserLoginData = {
+        login,
+        password,
+      };
+      httpClient
+        .post(apiUrls.auth.login, userData)
+        .then((userData: RequestResponse) => {
+          console.log(userData)
+          navigate("/dashboard");
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     }
   };
+
+  const storeUserData = (userData: RequestResponse) => {
+    
+  }
 
   const isValid = () => {
     const isCorrectCapatcha = capatchaRef.current.checkResults();

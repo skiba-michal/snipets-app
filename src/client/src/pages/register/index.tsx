@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BaseButton, BaseInput, FormWrapper } from "@components";
-import { inputErrors } from "@const";
-import { PositionEnum } from "@interfaces";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import LoginIcon from "@mui/icons-material/Login";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { BaseButton, BaseInput, FormWrapper } from "@components";
+import { apiUrls, inputErrors } from "@const";
+import { PositionEnum } from "@interfaces";
 import { ResgisterData } from "@models";
 import { httpClient } from "@utils";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import "./register.scoped.scss";
 
 const RegisterPage = () => {
@@ -52,14 +52,11 @@ const RegisterPage = () => {
         secretKey,
       };
       httpClient
-        .post("test", userData)
-        .then(e => {
-          console.log(e, "then");
+        .post(apiUrls.auth.signup, userData)
+        .then(() => {
+          navigate("/login");
         })
-        .catch(a => {
-          console.log(a, "erreeeee");
-        })
-        .finally(() => {
+        .catch(() => {
           setLoading(false);
         });
     }
@@ -128,14 +125,14 @@ const RegisterPage = () => {
             validationSettings={{ isRequired: true, maxLength: 50 }}
           />
           <div className="display-row section-margin">
+            <BaseButton text="login" onClick={onClickLoginBtn} StartIcon={ArrowBackIcon} position={PositionEnum.LEFT} />
             <BaseButton
-              text="login"
-              onClick={onClickLoginBtn}
-              StartIcon={ArrowBackIcon}
+              text="register"
+              onClick={onSubmit}
+              EndIcon={LoginIcon}
+              position={PositionEnum.RIGHT}
               loading={loading}
-              position={PositionEnum.LEFT}
             />
-            <BaseButton text="register" onClick={onSubmit} EndIcon={LoginIcon} position={PositionEnum.RIGHT} />
           </div>
         </FormWrapper>
       </div>

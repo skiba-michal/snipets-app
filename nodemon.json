@@ -1,5 +1,8 @@
 {
   "watch": ["./src/backend/**/*.ts"],
+  "exec": "tsc",
+  "ext": "ts",
+  "ignore": [],
   "env": {
     "PORT": 8080,
     "DB_USER": "user",

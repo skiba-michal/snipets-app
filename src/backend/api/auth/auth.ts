@@ -5,9 +5,9 @@ import { login } from "./auth.controller";
 import { UserModel } from "./auth.model";
 import { signup } from "./auth.controller";
 
-const router = Router();
+const router = Router({ strict: true });
 
-router.post("/login", (req, b, c) => login(req, b, c));
+router.post("/login", (req, res, next) => login(req, res, next));
 router.post(
   "/signup",
   [
