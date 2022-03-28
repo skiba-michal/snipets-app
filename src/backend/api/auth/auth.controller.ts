@@ -3,14 +3,14 @@ import bcrypt from "bcryptjs";
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import { validationMessages, succesMessages, errorMessages } from "@utils";
-import { User, UserLoginData, RequestError, RequestResponse } from "@models";
+import { UserDataDb, UserLoginData, RequestError, RequestResponse, ResgisterData, UserDataResponse } from "@models";
 import { UserModel } from "./auth.model";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const body = req.body as UserLoginData;
   const login = body.login;
   const password = body.password;
-  let loadedUser: User;
+  let loadedUser: UserDataDb;
 
   UserModel.findOne({ login })
     .then(user => {
@@ -31,12 +31,13 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
       const userId = loadedUser._id ? loadedUser._id.toString() : "";
       const token = jwt.sign({ login: loadedUser.login, userId: userId }, process.env.HASH_KEY, { expiresIn: "2h" });
 
-      const response: RequestResponse = {
+      const response: RequestResponse<UserDataResponse> = {
         message: succesMessages.logedIn,
         data: {
           name: loadedUser.name,
           token: token,
           permissions: loadedUser.permissions,
+          settings: loadedUser.settings || {}, // to change
           id: userId,
         },
       };
@@ -60,7 +61,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
     throw error;
   }
 
-  const body = req.body as User;
+  const body = req.body as ResgisterData;
   const login = body.login;
   const name = body.name;
   const password = body.password;
@@ -76,8 +77,9 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
       return user.save();
     })
     .then(() => {
-      const response: RequestResponse = {
+      const response: RequestResponse<null> = {
         message: succesMessages.userCreated,
+        data: null,
       };
       res.status(201).json(response);
     })

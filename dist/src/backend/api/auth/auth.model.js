@@ -42,6 +42,12 @@ const UserSchema = new mongoose_1.Schema({
         type: Array,
         default: [],
     },
+    settings: {
+        showOnlyMyData: {
+            type: Boolean,
+            default: false,
+        }
+    }
 });
 exports.UserModel = mongoose_1.default.model("User", UserSchema);
 // Example of ref

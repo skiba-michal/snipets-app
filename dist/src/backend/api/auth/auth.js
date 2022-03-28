@@ -15,9 +15,10 @@ const _utils_1 = require("@utils");
 const auth_controller_1 = require("./auth.controller");
 const auth_model_1 = require("./auth.model");
 const auth_controller_2 = require("./auth.controller");
+const _models_1 = require("@models");
 const router = (0, express_1.Router)({ strict: true });
-router.post("/login", (req, res, next) => (0, auth_controller_1.login)(req, res, next));
-router.post("/signup", [
+router.post(`/${_models_1.apiStructure.auth.login}`, auth_controller_1.login);
+router.post(`/${_models_1.apiStructure.auth.signup}`, [
     (0, express_validator_1.body)("login")
         .trim()
         .isLength({ min: 3 })

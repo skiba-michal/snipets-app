@@ -1,2 +1,2 @@
 export { inputErrors } from "./inputErrors";
-export { apiUrls } from "./apiUrls";
+export { apiStructure } from "./apiStructure";

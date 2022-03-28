@@ -5,7 +5,7 @@ export interface RequestError extends Error {
   data?: ValidationError[];
 }
 
-export interface RequestResponse {
+export interface RequestResponse<T> {
   message?: string;
-  data?: any;
+  data?: T;
 }

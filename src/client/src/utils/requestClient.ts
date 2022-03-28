@@ -26,7 +26,7 @@ const httpClient = axios.create({
 });
 
 httpClient.interceptors.response.use(
-  (response: AxiosResponse<RequestResponse>) => {
+  (response: AxiosResponse<RequestResponse<unknown>>) => {
     if (response.data?.message) {
       store.dispatch(setUserMessage({
         message: response.data.message,

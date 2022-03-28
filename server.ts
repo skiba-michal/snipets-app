@@ -1,6 +1,7 @@
 import "module-alias/register";
 import express from "express";
 import mongoose from "mongoose";
+import helmet from "helmet";
 import path from "path";
 import bodyParser from "body-parser";
 import todosRoutes from "./src/backend/routes/todos";
@@ -11,6 +12,7 @@ import { errorHandler } from "@middlewares";
 
 const app = express();
 
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(express.static(path.join("public")));
 
@@ -22,7 +24,7 @@ app.use((_, res, next) => {
 });
 
 app.use("/api", authRoutes);
-app.use("/api", todosRoutes);
+app.use("/api", todosRoutes); // to del
 
 app.all("/api/*", () => {
   const error: RequestError = new Error(errorMessages.notFound);

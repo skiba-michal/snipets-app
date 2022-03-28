@@ -7,7 +7,7 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BaseButton, BaseInput, FormWrapper } from "@components";
-import { apiUrls, inputErrors } from "@const";
+import { inputErrors, apiStructure } from "@const";
 import { PositionEnum } from "@interfaces";
 import { ResgisterData } from "@models";
 import { httpClient } from "@utils";
@@ -52,9 +52,9 @@ const RegisterPage = () => {
         secretKey,
       };
       httpClient
-        .post(apiUrls.auth.signup, userData)
+        .post(apiStructure.auth.signup, userData)
         .then(() => {
-          navigate("/login");
+          navigate("/");
         })
         .catch(() => {
           setLoading(false);

@@ -17,6 +17,12 @@ const UserSchema = new Schema({
     type: Array,
     default: [],
   },
+  settings: {
+    showOnlyMyData: {
+      type: Boolean,
+      default: false,
+    }
+  }
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

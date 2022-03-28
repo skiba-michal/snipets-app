@@ -1,14 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import LoginIcon from "@mui/icons-material/Login";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { BaseInput, FormWrapper, BaseButton, Capatcha, CapatchaHandleRef } from "@components";
+import { BaseInput, FormWrapper, BaseButton } from "@components";
 import { PositionEnum } from "@interfaces";
-import { RequestResponse, UserLoginData } from "@models";
-import { httpClient } from "@utils";
-import { apiUrls } from "@const";
+import { RequestResponse, UserDataResponse, UserLoginData } from "@models";
+import { apiStructure } from "@const";
+import { httpClient, setUserToken } from "@utils";
+import { setUserData } from "@store/user/user.reducer";
 import "./login.scoped.scss";
 
 const LoginPage = () => {
@@ -20,7 +22,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const capatchaRef = useRef<CapatchaHandleRef>(null);
+  const dispatch = useDispatch();
 
   const onSubmit = () => {
     setWasSubmitted(true);
@@ -32,9 +34,9 @@ const LoginPage = () => {
         password,
       };
       httpClient
-        .post(apiUrls.auth.login, userData)
-        .then((userData: RequestResponse) => {
-          console.log(userData)
+        .post(apiStructure.auth.login, userData)
+        .then((userData: RequestResponse<UserDataResponse>) => {
+          storeUserData(userData.data);
           navigate("/dashboard");
         })
         .catch(() => {
@@ -43,13 +45,13 @@ const LoginPage = () => {
     }
   };
 
-  const storeUserData = (userData: RequestResponse) => {
-    
-  }
+  const storeUserData = (userData: UserDataResponse) => {
+    setUserToken(userData.token || "");
+    dispatch(setUserData(userData));
+  };
 
   const isValid = () => {
-    const isCorrectCapatcha = capatchaRef.current.checkResults();
-    return isCorrectCapatcha && isLoginCorrect && isPasswordCorrect;
+    return isLoginCorrect && isPasswordCorrect;
   };
 
   const onClickResiterBtn = () => {
@@ -80,7 +82,6 @@ const LoginPage = () => {
             setErrorParrent={setIsPasswordCorrect}
             validationSettings={{ isRequired: true, maxLength: 50, minLength: 6 }}
           />
-          <Capatcha ref={capatchaRef} wasSubmitted={wasSubmitted} />
           <div className="display-row section-margin">
             <BaseButton
               text="register"

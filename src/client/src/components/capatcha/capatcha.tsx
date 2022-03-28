@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useState } from "rea
 import { BaseInput } from "@components";
 import { CapatchaProps, CapatchaHandle } from "./capatcha.interface";
 import "./capatcha.scoped.scss";
-
+// Unused component
 export const Capatcha = forwardRef<CapatchaHandle, CapatchaProps>(({ wasSubmitted = false }, ref) => {
   const [mathResult, setMathResult] = useState("");
   const [firstValue, setFirstValue] = useState(0);

@@ -38,6 +38,7 @@ const login = (req, res, next) => {
                 name: loadedUser.name,
                 token: token,
                 permissions: loadedUser.permissions,
+                settings: loadedUser.settings || {},
                 id: userId,
             },
         };
@@ -76,6 +77,7 @@ const signup = (req, res, next) => {
         .then(() => {
         const response = {
             message: _utils_1.succesMessages.userCreated,
+            data: null,
         };
         res.status(201).json(response);
     })

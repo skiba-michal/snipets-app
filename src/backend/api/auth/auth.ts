@@ -4,12 +4,13 @@ import { validationMessages } from "@utils";
 import { login } from "./auth.controller";
 import { UserModel } from "./auth.model";
 import { signup } from "./auth.controller";
+import { apiStructure } from "@models";
 
 const router = Router({ strict: true });
 
-router.post("/login", (req, res, next) => login(req, res, next));
+router.post(`/${apiStructure.auth.login}`, login);
 router.post(
-  "/signup",
+  `/${apiStructure.auth.signup}`,
   [
     body("login")
       .trim()
