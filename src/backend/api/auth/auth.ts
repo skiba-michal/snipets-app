@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import { validationMessages } from "@utils";
-import { login } from "./auth.controller";
-import { UserModel } from "./auth.model";
-import { signup } from "./auth.controller";
+import { UserModel } from "@schemas";
 import { apiStructure } from "@models";
+import { isAuth } from "@middlewares";
+import { login, signup, refreshToken, logout } from "./auth.controller";
 
 const router = Router({ strict: true });
 
@@ -32,5 +32,6 @@ router.post(
   ],
   signup
 );
-
+router.get(`/${apiStructure.auth.refreshToken}`, refreshToken);
+router.post(`/${apiStructure.auth.logout}`, isAuth, logout);
 export default router;

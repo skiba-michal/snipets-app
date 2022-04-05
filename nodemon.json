@@ -9,6 +9,8 @@
     "DB_PASSWORD": "user",
     "DB_NAME": "snipet",
     "HASH_KEY": "supersecret",
-    "SECRET_KEY": "supersecretkey"
+    "REFRESH_HASH_KEY": "supersecret2",
+    "SECRET_KEY": "supersecretkey",
+    "MODE": "dev"
   }
 }

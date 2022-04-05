@@ -6,8 +6,10 @@
       "@utils": ["src/utils/index"],
       "@store/*": ["src/store/*"],
       "@const": ["src/const/index"],
+      "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
       "@interfaces": ["src/interfaces/index"],
+      "@hooks": ["src/hooks/index"],
       "@models": ["models/index"]
     },
     "jsx": "react",

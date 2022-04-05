@@ -10,3 +10,9 @@ export enum PositionEnum {
   CENTER = "center-position",
   UNSET = "",
 }
+
+export enum UserStatusEnum {
+  REJECTED = "rejected",
+  UNCONFIRMED = "unconfirmed",
+  CONFIRMED = "confirmed",
+}

@@ -3,7 +3,7 @@ import { Response, NextFunction } from "express";
 import { AuthRequest, RequestError } from "@models";
 import { errorMessages, isJwtPayload } from "@utils";
 
-export const isAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const isAuth = (req: AuthRequest, _res: Response, next: NextFunction) => {
   const authorization = req.get("Authorization")?.split(" ");
 
   if (!authorization || authorization.length < 1) {
@@ -18,6 +18,12 @@ export const isAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     decodedToken = jwt.verify(token, process.env.HASH_KEY);
   } catch (err) {
+    if (err.message === "jwt expired") {
+      err.message = errorMessages.tokenExpired;
+      err.data = {
+        isTokenExpired: true,
+      }
+    }
     err.statusCode = 500;
     throw err;
   }

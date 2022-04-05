@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAuth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const _utils_1 = require("@utils");
-const isAuth = (req, res, next) => {
+const isAuth = (req, _res, next) => {
     var _a;
     const authorization = (_a = req.get("Authorization")) === null || _a === void 0 ? void 0 : _a.split(" ");
     if (!authorization || authorization.length < 1) {
@@ -20,6 +20,12 @@ const isAuth = (req, res, next) => {
         decodedToken = jsonwebtoken_1.default.verify(token, process.env.HASH_KEY);
     }
     catch (err) {
+        if (err.message === "jwt expired") {
+            err.message = _utils_1.errorMessages.tokenExpired;
+            err.data = {
+                isTokenExpired: true,
+            };
+        }
         err.statusCode = 500;
         throw err;
     }

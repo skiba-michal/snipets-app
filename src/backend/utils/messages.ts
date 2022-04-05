@@ -8,13 +8,16 @@ export const validationMessages = Object.freeze({
 });
 
 export const errorMessages = Object.freeze({
-  userNotFound: "A yser with this email could not be found",
-  wrongPassword: "Wrong password",
+  userNotFound: "User not found",
+  badLoginData: "Wrong login or password",
   notAuthenticated: "Not authenticated",
-  notFound: "Not found"
-})
+  tokenExpired: "The token has expired, please login again",
+  notFound: "Not found",
+  corsBlocked: "Not allowed by CORS",
+});
 
 export const succesMessages = Object.freeze({
   userCreated: "User created!",
-  logedIn: "You are loged in!",
+  logedIn: "You are loged in",
+  logedOut: "You are loged out"
 });

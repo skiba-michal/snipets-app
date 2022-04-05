@@ -12,10 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const express_validator_1 = require("express-validator");
 const _utils_1 = require("@utils");
-const auth_controller_1 = require("./auth.controller");
-const auth_model_1 = require("./auth.model");
-const auth_controller_2 = require("./auth.controller");
+const _schemas_1 = require("@schemas");
 const _models_1 = require("@models");
+const _middlewares_1 = require("@middlewares");
+const auth_controller_1 = require("./auth.controller");
 const router = (0, express_1.Router)({ strict: true });
 router.post(`/${_models_1.apiStructure.auth.login}`, auth_controller_1.login);
 router.post(`/${_models_1.apiStructure.auth.signup}`, [
@@ -24,7 +24,7 @@ router.post(`/${_models_1.apiStructure.auth.signup}`, [
         .isLength({ min: 3 })
         .withMessage(_utils_1.validationMessages.toShortLogin)
         .custom((value) => __awaiter(void 0, void 0, void 0, function* () {
-        const userDoc = yield auth_model_1.UserModel.findOne({ login: value });
+        const userDoc = yield _schemas_1.UserModel.findOne({ login: value });
         if (userDoc) {
             return Promise.reject(_utils_1.validationMessages.loginExist);
         }
@@ -36,5 +36,7 @@ router.post(`/${_models_1.apiStructure.auth.signup}`, [
             return Promise.reject(_utils_1.validationMessages.secretKeyIsInvalid);
         }
     })),
-], auth_controller_2.signup);
+], auth_controller_1.signup);
+router.get(`/${_models_1.apiStructure.auth.refreshToken}`, auth_controller_1.refreshToken);
+router.post(`/${_models_1.apiStructure.auth.logout}`, _middlewares_1.isAuth, auth_controller_1.logout);
 exports.default = router;

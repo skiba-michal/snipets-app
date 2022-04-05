@@ -3,6 +3,22 @@ body {
   color: $font-primary-color;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: $shadow-color; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $shadow-color; 
+}
+
 .text-error {
   color: $error-color;
 }

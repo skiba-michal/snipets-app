@@ -4,6 +4,7 @@
     "paths": {
       "@api/*": ["backend/api/*"],
       "@utils": ["backend/utils/index"],
+      "@schemas": ["backend/schemas/index"],
       "@middlewares": ["backend/middlewares/index"],
       "@models": ["client/models/index"]
     },

@@ -2,9 +2,18 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
-import { validationMessages, succesMessages, errorMessages } from "@utils";
-import { UserDataDb, UserLoginData, RequestError, RequestResponse, ResgisterData, UserDataResponse } from "@models";
-import { UserModel } from "./auth.model";
+import { validationMessages, succesMessages, errorMessages, createUserTokens } from "@utils";
+import {
+  UserDataDb,
+  UserLoginData,
+  RequestError,
+  RequestResponse,
+  ResgisterData,
+  UserDataResponse,
+  AuthRequest,
+  RefreshTokenResponse,
+} from "@models";
+import { UserModel } from "@schemas";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const body = req.body as UserLoginData;
@@ -15,34 +24,55 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
   UserModel.findOne({ login })
     .then(user => {
       if (!user) {
-        const error: RequestError = new Error(errorMessages.userNotFound);
+        const error: RequestError = new Error(errorMessages.badLoginData);
         error.statusCode = 401;
         throw error;
       }
       loadedUser = user;
-      return bcrypt.compare(password, user.password);
+      return { isEqual: bcrypt.compare(password, user.password), user };
     })
-    .then(isEqual => {
+    .then(data => {
+      const { isEqual, user } = data;
       if (!isEqual) {
-        const error: RequestError = new Error(errorMessages.wrongPassword);
+        const error: RequestError = new Error(errorMessages.badLoginData);
         error.statusCode = 401;
         throw error;
       }
-      const userId = loadedUser._id ? loadedUser._id.toString() : "";
-      const token = jwt.sign({ login: loadedUser.login, userId: userId }, process.env.HASH_KEY, { expiresIn: "2h" });
+      const { token, refreshToken, userId } = createUserTokens(user);
 
-      const response: RequestResponse<UserDataResponse> = {
-        message: succesMessages.logedIn,
-        data: {
-          name: loadedUser.name,
-          token: token,
-          permissions: loadedUser.permissions,
-          settings: loadedUser.settings || {}, // to change
-          id: userId,
-        },
-      };
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        maxAge: 3.154e10, // 1 year
+      });
 
-      res.status(200).json(response);
+      UserModel.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            refreshToken: refreshToken,
+          },
+        }
+      )
+        .then(() => {
+          const response: RequestResponse<UserDataResponse> = {
+            message: succesMessages.logedIn,
+            data: {
+              name: loadedUser.name,
+              token: token,
+              permissions: loadedUser.permissions,
+              settings: loadedUser.settings,
+              id: userId,
+            },
+          };
+
+          res.status(200).json(response);
+        })
+        .catch(err => {
+          if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
+        });
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -57,7 +87,10 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
   if (!errors.isEmpty()) {
     const error: RequestError = new Error(validationMessages.validationFailed);
     error.statusCode = 422;
-    error.data = errors.array();
+    error.data = {
+      ...error.data,
+      errors: errors.array(),
+    };
     throw error;
   }
 
@@ -89,4 +122,78 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
       }
       next(err);
     });
+};
+
+export const refreshToken = (req: Request, res: Response, next: NextFunction) => {
+  const cookies = req.cookies;
+  const refreshToken = cookies.refreshToken;
+  if (!refreshToken) {
+    const error: RequestError = new Error(errorMessages.notAuthenticated);
+    error.statusCode = 401;
+    throw error;
+  }
+  try {
+    jwt.verify(refreshToken, process.env.REFRESH_HASH_KEY);
+  } catch (err) {
+    if (err.message === "jwt expired") {
+      err.message = errorMessages.tokenExpired;
+      err.data = {
+        isRefreshTokenExpired: true,
+      };
+    }
+    err.statusCode = 500;
+    throw err;
+  }
+
+  UserModel.findOne({ refreshToken })
+    .then(user => {
+      if (!user) {
+        const error: RequestError = new Error(errorMessages.notAuthenticated);
+        error.statusCode = 401;
+        throw error;
+      }
+      const { token } = createUserTokens(user, true);
+
+      const response: RequestResponse<RefreshTokenResponse> = {
+        message: "",
+        data: {
+          token: token,
+        },
+      };
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 403;
+      }
+      err.message = errorMessages.tokenExpired;
+      next(err);
+    });
+};
+
+export const logout = (req: AuthRequest, res: Response, next: NextFunction) => {
+  const userId = req.userId;
+
+  UserModel.findOne({ _id: userId }).then(user => {
+    if (!user) {
+      const error: RequestError = new Error(errorMessages.userNotFound);
+      error.statusCode = 401;
+      throw error;
+    }
+
+    UserModel.updateOne(
+      { _id: userId },
+      {
+        $set: {
+          refreshToken: "",
+        },
+      }
+    );
+    const response: RequestResponse<null> = {
+      message: succesMessages.logedOut,
+      data: null,
+    };
+
+    res.status(200).json(response);
+  });
 };

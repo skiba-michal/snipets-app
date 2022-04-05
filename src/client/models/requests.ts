@@ -2,7 +2,11 @@ import { ValidationError } from "express-validator";
 
 export interface RequestError extends Error {
   statusCode?: number;
-  data?: ValidationError[];
+  data?: {
+    errors?: ValidationError[];
+    isTokenExpired?: boolean;
+    isRefreshTokenExpired?: boolean;
+  }
 }
 
 export interface RequestResponse<T> {

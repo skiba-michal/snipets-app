@@ -97,6 +97,7 @@ export const BaseInput = ({
           underline: "mui-input-underline",
           error: "mui-input-error",
         }}
+        // autoComplete="off"
         readOnly={readOnly}
         onFocus={() => setReadOnly(false)}
         multiline={multiline}

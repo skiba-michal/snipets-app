@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserMessage } from "@interfaces";
-import { fetchAccountProfile } from "./user.thunks";
-import { UserDataResponse } from "@models";
+import { fetchUserProfile } from "./user.thunks";
+import { UserData } from "@models";
+import { UserStatusEnum } from "@interfaces";
 
 export interface UserStore {
-  userData: UserDataResponse;
-  userMessage: UserMessage;
-  account: {}; // to del
+  userData: UserData;
+  isUserDataPending: boolean;
+  userStatus: UserStatusEnum;
 }
 
 export const userData = createSlice({
@@ -20,29 +20,36 @@ export const userData = createSlice({
         showOnlyMyData: false,
       },
     },
-    userMessage: {
-      type: null,
-      message: null,
-    },
-    account: {}, // to del
+    isUserDataPending: false,
+    userStatus: UserStatusEnum.UNCONFIRMED,
   },
   reducers: {
-    setUserMessage: (state: UserStore, action: PayloadAction<UserMessage>) => {
-      state.userMessage = action.payload;
-    },
-    setUserData: (state: UserStore, action: PayloadAction<UserDataResponse>) => {
+    setUserData: (state: UserStore, action: PayloadAction<UserData>) => {
       const data = action.payload;
-      delete data.token;
       state.userData = data;
+      state.userStatus = UserStatusEnum.CONFIRMED;
+      state.isUserDataPending = false;
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchAccountProfile.fulfilled, (state, action) => {
-      // to del
-      state.account = action.payload;
+    builder.addCase(fetchUserProfile.fulfilled, (state, action) => {
+      const data = action.payload;
+      delete data.token;
+      state.userData = action.payload;
+      state.userStatus = UserStatusEnum.CONFIRMED;
+      state.isUserDataPending = false;
+    });
+
+    builder.addCase(fetchUserProfile.pending, state => {
+      state.isUserDataPending = true;
+    });
+
+    builder.addCase(fetchUserProfile.rejected, (state, action) => {
+      state.isUserDataPending = false;
+      state.userStatus = UserStatusEnum.REJECTED;
     });
   },
 });
 
 export type UserStoreData = ReturnType<typeof userData.reducer>;
-export const { setUserMessage, setUserData } = userData.actions;
+export const { setUserData } = userData.actions;

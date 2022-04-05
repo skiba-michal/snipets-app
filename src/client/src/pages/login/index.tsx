@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import LoginIcon from "@mui/icons-material/Login";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { BaseInput, FormWrapper, BaseButton } from "@components";
+import { BaseInput, FormWrapper, BaseButton, CheckAuth } from "@components";
 import { PositionEnum } from "@interfaces";
 import { RequestResponse, UserDataResponse, UserLoginData } from "@models";
 import { apiStructure } from "@const";
 import { httpClient, setUserToken } from "@utils";
 import { setUserData } from "@store/user/user.reducer";
+import logo from "@assets/logo_transparent.png";
 import "./login.scoped.scss";
 
 const LoginPage = () => {
@@ -26,7 +27,7 @@ const LoginPage = () => {
 
   const onSubmit = () => {
     setWasSubmitted(true);
-    const isFormValid = isValid();
+    const isFormValid = isLoginCorrect && isPasswordCorrect;
     if (isFormValid) {
       setLoading(true);
       const userData: UserLoginData = {
@@ -36,8 +37,8 @@ const LoginPage = () => {
       httpClient
         .post(apiStructure.auth.login, userData)
         .then((userData: RequestResponse<UserDataResponse>) => {
-          storeUserData(userData.data);
-          navigate("/dashboard");
+          setUserToken(userData.data.token || "");
+          dispatch(setUserData(userData.data));
         })
         .catch(() => {
           setLoading(false);
@@ -45,13 +46,10 @@ const LoginPage = () => {
     }
   };
 
-  const storeUserData = (userData: UserDataResponse) => {
-    setUserToken(userData.token || "");
-    dispatch(setUserData(userData));
-  };
-
-  const isValid = () => {
-    return isLoginCorrect && isPasswordCorrect;
+  const enterListener = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.code === "Enter" || event.code === "NumpadEnter") {
+      onSubmit();
+    }
   };
 
   const onClickResiterBtn = () => {
@@ -59,46 +57,49 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="full-screen-component-wrapper">
-      <div className="card-wrapper">
-        <div className="section-title">Sign in</div>
-        <FormWrapper>
-          <BaseInput
-            value={login}
-            setValue={setLogin}
-            label="Login"
-            Icon={AccountCircleIcon}
-            showErrors={wasSubmitted}
-            setErrorParrent={setIsLoginCorrect}
-            validationSettings={{ isRequired: true, maxLength: 50, minLength: 3 }}
-          />
-          <BaseInput
-            value={password}
-            setValue={setPassword}
-            type="password"
-            label="Password"
-            Icon={KeyIcon}
-            showErrors={wasSubmitted}
-            setErrorParrent={setIsPasswordCorrect}
-            validationSettings={{ isRequired: true, maxLength: 50, minLength: 6 }}
-          />
-          <div className="display-row section-margin">
-            <BaseButton
-              text="register"
-              onClick={onClickResiterBtn}
-              StartIcon={ArrowBackIcon}
-              position={PositionEnum.LEFT}
+    <div className="full-screen-component-wrapper" onKeyPress={enterListener}>
+      <CheckAuth>
+        <img src={logo} alt="Logo" className="logo" />
+        <div className="card-wrapper">
+          <div className="section-title">Sign in</div>
+          <FormWrapper>
+            <BaseInput
+              value={login}
+              setValue={setLogin}
+              label="Login"
+              Icon={AccountCircleIcon}
+              showErrors={wasSubmitted}
+              setErrorParrent={setIsLoginCorrect}
+              validationSettings={{ isRequired: true, maxLength: 50, minLength: 3 }}
             />
-            <BaseButton
-              text="login"
-              onClick={onSubmit}
-              EndIcon={LoginIcon}
-              loading={loading}
-              position={PositionEnum.RIGHT}
+            <BaseInput
+              value={password}
+              setValue={setPassword}
+              type="password"
+              label="Password"
+              Icon={KeyIcon}
+              showErrors={wasSubmitted}
+              setErrorParrent={setIsPasswordCorrect}
+              validationSettings={{ isRequired: true, maxLength: 50, minLength: 6 }}
             />
-          </div>
-        </FormWrapper>
-      </div>
+            <div className="display-row section-margin">
+              <BaseButton
+                text="register"
+                onClick={onClickResiterBtn}
+                StartIcon={ArrowBackIcon}
+                position={PositionEnum.LEFT}
+              />
+              <BaseButton
+                text="login"
+                onClick={onSubmit}
+                EndIcon={LoginIcon}
+                loading={loading}
+                position={PositionEnum.RIGHT}
+              />
+            </div>
+          </FormWrapper>
+        </div>
+      </CheckAuth>
     </div>
   );
 };

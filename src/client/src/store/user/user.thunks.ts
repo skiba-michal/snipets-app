@@ -1,11 +1,13 @@
-import { AxiosInstance, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import { UserDataResponse } from "@models";
+import { apiStructure } from "@const"
 import { buildAsyncThunk } from "../utils";
+import { httpClient } from "@utils";
 
-export const fetchAccountProfile = buildAsyncThunk(
-  "user/fetchAccountProfile",
-  async (httpClient: AxiosInstance, store) => {
-    const response: AxiosResponse<any> = await httpClient.get(`some url`);
-    // store.dispatch(fetchSubaccounts());
+export const fetchUserProfile = buildAsyncThunk(
+  "user/fetchUserProfile",
+  async () => {
+    const response: AxiosResponse<UserDataResponse> = await httpClient.get(apiStructure.userData.profile);
     return response.data;
   }
 );

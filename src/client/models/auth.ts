@@ -4,6 +4,13 @@ export interface AuthRequest extends Request {
   userId?: string;
 }
 
+export interface UserData {
+  name: string;
+  permissions: string[];
+  settings: UserSettings;
+  id: string;
+}
+
 // Request
 
 export interface UserLoginData {
@@ -26,15 +33,16 @@ export interface UserDataDb {
   login: string;
   name: string;
   permissions: string[];
+  refreshToken: string;
   password: string;
   settings: UserSettings;
   _id: string;
 }
 
-export interface UserDataResponse {
-  name: string;
-  permissions: string[];
-  settings: UserSettings;
-  id: string;
-  token?: string;
+export interface UserDataResponse extends UserData {
+  token: string;
+}
+
+export interface RefreshTokenResponse {
+  token: string;
 }

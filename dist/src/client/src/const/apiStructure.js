@@ -4,7 +4,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.apiStructure = void 0;
 exports.apiStructure = {
     auth: {
-        login: `auth/login`,
-        signup: `auth/signup`,
+        login: "auth/login",
+        signup: "auth/signup",
+        refreshToken: "auth/refreshToken",
+        logout: "auth/logout",
+    },
+    userData: {
+        profile: "userData/profile",
     },
 };

@@ -1,5 +1,16 @@
-@import "@styles/colors";
 @import "@styles/mediaQueries";
-@import "@styles/mixins";
-@import "@styles/variables";
 
+.full-screen-component-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  @include md {
+    padding-bottom: 170px;
+  }
+}
+
+.logo {
+  max-width: 300px;
+  margin-bottom: 20px;
+  top: 20px;
+}

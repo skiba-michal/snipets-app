@@ -13,11 +13,18 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  refreshToken: {
+    type: String,
+    required: true,
+  },
   permissions: {
     type: Array,
     default: [],
   },
   settings: {
+    default: {
+      showOnlyMyData: false,
+    },
     showOnlyMyData: {
       type: Boolean,
       default: false,

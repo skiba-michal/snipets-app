@@ -28,7 +28,7 @@ export const BaseButton = ({
         {text}
         {loading && (
           <div className="loader">
-            <LoadingIcon sizeType={SizeEnum.SMALL} />
+            <LoadingIcon sizeValue={SizeEnum.SMALL} />
           </div>
         )}
       </Button>
