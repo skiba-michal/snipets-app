@@ -1,0 +1,121 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+@import "@styles/mediaQueries";
+
+.header-wrapper-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $secondary-color;
+  padding: 5px;
+  position: fixed;
+  @include xl {
+    padding: 10px;
+  }
+  .logo {
+    height: 40px;
+    @include xl {
+      height: 60px;
+      width: 110px;
+    }
+  }
+  .navigation-wrapper {
+    display: none;
+    @include md {
+      display: flex;
+      .nav-link-wrapper {
+        a {
+          text-decoration: none;
+          color: $font-primary-color;
+        }
+        .nav-link-content {
+          height: 30px;
+          font-size: $font-small;
+          padding: 0 6px;
+          @include center;
+          @include lg {
+            padding: 0 12px;
+            font-size: $font-medium;
+          }
+          @include xl {
+            height: 50px;
+            font-size: $font-medium-big;
+          }
+          &:hover {
+            background-color: $secondary-color-lighten;
+          }
+        }
+      }
+      .active-link {
+  
+        .nav-link-content {
+          border-bottom: 1px solid $focus-color;
+          background-color: $secondary-color-lighten;
+        }
+      }
+    }
+  }
+  .navigation-wrapper-mobile {
+    @include md {
+      display: none;
+    }
+    .nav-icon-mobile {
+      font-size: $font-big;
+      color: $font-primary-color;
+      &:hover {
+        color: $font-primary-color-darker;
+      }
+    }
+  }
+  .navigation-icons-wrapper {
+    @include center;
+    button {
+      padding: 4px;
+      @include xl {
+        padding: 8px;
+      }
+    }
+    .nav-icon {
+      font-size: $font-medium-big;
+      @include xl {
+        font-size: $font-big;
+      }
+      text-decoration: none;
+      color: $font-primary-color;
+      cursor: pointer;
+      &:hover {
+        color: $font-primary-color-darker;
+      }
+    }
+  }
+}
+
+.nav-menu-wrapper-mobile {
+  .MuiPaper-root {
+    background-color: $secondary-color;
+    min-width: 320px;
+    padding: 5px 10px;
+    left: Calc(50% - 160px) !important;
+    @include primary-border-shadow;
+    a {
+      text-decoration: none;
+      color: $font-primary-color;
+    }
+    .nav-link-content-mobile {
+      font-size: $font-medium;
+      padding: 5px 10px;
+      @include center;
+      &:hover {
+        background-color: $secondary-color-lighten;
+      }
+    }
+    .active-link-mobile {
+      .nav-link-content-mobile {
+        border-bottom: 1px solid $focus-color;
+        background-color: $secondary-color-lighten;
+      }
+    }
+  }
+}

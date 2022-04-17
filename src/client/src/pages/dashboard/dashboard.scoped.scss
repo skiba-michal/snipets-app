@@ -1,40 +1,49 @@
 @import "@styles/colors";
 @import "@styles/variables";
 @import "@styles/mixins";
+@import "@styles/mediaQueries";
 
 .dashboard-wrapper {
   @include full-screen;
-}
+  .dashboard-content-wrapper {
+    margin-top: 50px;
+    height: calc(100vh - 50px);
+    @include md {
+      margin-top: 80px;
+      height: calc(100vh - 80px);
+    }
+    overflow-x: auto;
+    position: relative;
+    .show-nav-btn {
+      position: fixed;
+      background: $secondary-color-lighten;
+      width: 35x;
+      height: 35px;
+      @include md {
+        width: 50px;
+        height: 50px;
+      }
+      svg {
+        color: $border-color;
+        font-size: 20px;
+        @include md {
+          font-size: 34px;
+        }
+      }
+    }
 
-.wrapperek {
-  margin-top: 80px;
-  height: calc(100vh - 80px);
-  overflow-x: auto;
-  position: relative;
-}
+    .open-dashboard {
+      width: calc(100% - 240px);
+      margin-left: 240px;
+    }
 
-.show-nav-btn {
-  position: fixed;
-  background: $secondary-color-lighten;
-  width: 50px;
-  height: 50px;
-  opacity: 0.9;
-  svg {
-    color: $border-color;
-    font-size: 34px;
+    .close-dashboard {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .dashboard-content {
+      transition: width 700ms, margin-left 700ms;
+    }
   }
-}
-
-.open-dashboard {
-  width: calc(100% - 240px);
-  margin-left: 240px;
-}
-
-.close-dashboard {
-  width: 100%;
-  margin-left: 0;
-}
-
-.dashboard-content {
-  transition: width 700ms, margin-left 700ms;
 }

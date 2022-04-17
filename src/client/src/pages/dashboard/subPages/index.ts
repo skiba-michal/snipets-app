@@ -6,3 +6,4 @@ export { Languages } from './languages';
 export { InterviewQuestions } from './interviewQuestions';
 export { Favorite } from './favorite';
 export { Compilers } from './compilers';
+export { AppsSnippets } from './appsSnippets';

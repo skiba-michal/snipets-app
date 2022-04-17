@@ -3,10 +3,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import store from "@store/index";
 import { injectHttpHandlerData } from "@utils";
+import { PrivateRoute } from "@components";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
 import Dashboard from "./pages/dashboard";
-import { PrivateRoute } from "@components";
 import {
   Compilers,
   Favorite,
@@ -16,6 +16,7 @@ import {
   Science,
   Snippets,
   Settings,
+  AppsSnippets,
 } from "./pages/dashboard/subPages";
 
 const App = () => {
@@ -31,10 +32,11 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index={true} element={<Favorite />} />
             <Route path="compilers" element={<Compilers />} />
+            <Route path="apps-snippets" element={<AppsSnippets />} />
+            <Route path="science" element={<Science />} />
             <Route path="interview-questions" element={<InterviewQuestions />} />
             <Route path="languages" element={<Languages />} />
             <Route path="generators" element={<Generators />} />
-            <Route path="science" element={<Science />} />
             <Route path="snippets" element={<Snippets />} />
             <Route path="settings" element={<Settings />} />
           </Route>

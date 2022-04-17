@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-wrapper">
       <HeaderNav />
-      <div className="wrapperek">
+      <div className="dashboard-content-wrapper">
         <div className="show-nav-btn">
           <IconButton onClick={() => setOpen(!open)}>
             <ArrowCircleRightIcon />
