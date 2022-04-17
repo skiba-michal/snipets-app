@@ -22,37 +22,43 @@ const login = (req, res, next) => {
             throw error;
         }
         loadedUser = user;
-        return { isEqual: bcryptjs_1.default.compare(password, user.password), user };
-    })
-        .then(data => {
-        const { isEqual, user } = data;
-        if (!isEqual) {
-            const error = new Error(_utils_1.errorMessages.badLoginData);
-            error.statusCode = 401;
-            throw error;
-        }
-        const { token, refreshToken, userId } = (0, _utils_1.createUserTokens)(user);
-        res.cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            maxAge: 3.154e10, // 1 year
-        });
-        _schemas_1.UserModel.updateOne({ _id: userId }, {
-            $set: {
-                refreshToken: refreshToken,
-            },
-        })
-            .then(() => {
-            const response = {
-                message: _utils_1.succesMessages.logedIn,
-                data: {
-                    name: loadedUser.name,
-                    token: token,
-                    permissions: loadedUser.permissions,
-                    settings: loadedUser.settings,
-                    id: userId,
+        bcryptjs_1.default
+            .compare(password, user.password)
+            .then(isEqual => {
+            if (!isEqual) {
+                const error = new Error(_utils_1.errorMessages.badLoginData);
+                error.statusCode = 401;
+                throw error;
+            }
+            const { token, refreshToken, userId } = (0, _utils_1.createUserTokens)(loadedUser);
+            res.cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+                maxAge: 3.154e10, // 1 year
+            });
+            _schemas_1.UserModel.updateOne({ _id: userId }, {
+                $set: {
+                    refreshToken: refreshToken,
                 },
-            };
-            res.status(200).json(response);
+            })
+                .then(() => {
+                const response = {
+                    message: _utils_1.succesMessages.logedIn,
+                    data: {
+                        name: loadedUser.name,
+                        token: token,
+                        permissions: loadedUser.permissions,
+                        settings: loadedUser.settings,
+                        id: userId,
+                    },
+                };
+                res.status(200).json(response);
+            })
+                .catch(err => {
+                if (!err.statusCode) {
+                    err.statusCode = 500;
+                }
+                next(err);
+            });
         })
             .catch(err => {
             if (!err.statusCode) {
@@ -169,6 +175,7 @@ const logout = (req, res, next) => {
             message: _utils_1.succesMessages.logedOut,
             data: null,
         };
+        res.clearCookie("refreshToken");
         res.status(200).json(response);
     });
 };

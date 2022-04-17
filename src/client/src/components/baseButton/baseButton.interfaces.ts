@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@interfaces";
+import { MaterialIcon, Size, SizeEnum } from "@interfaces";
 import type { Position } from "@interfaces";
 
 export interface BaseButtonProps {
@@ -9,6 +9,7 @@ export interface BaseButtonProps {
   disabled?: boolean;
   loading?: boolean;
   position?: Position;
-  StartIcon?: MaterialIcon
-  EndIcon?: MaterialIcon
+  StartIcon?: MaterialIcon;
+  EndIcon?: MaterialIcon;
+  size?: "small" | "medium" | "large";
 }

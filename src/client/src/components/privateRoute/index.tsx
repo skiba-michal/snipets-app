@@ -5,7 +5,7 @@ import { RootState } from "@store/rootReducer";
 import { fetchUserProfile } from "@store/user/user.thunks";
 import { getUserToken } from "@utils";
 import { SizeEnum, UserStatusEnum } from "@interfaces";
-import { LoadingIcon } from "../loadingIcon/loadingIcon";
+import { LoadingIcon } from "../loadingIcon";
 
 export const PrivateRoute = () => {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(null);

@@ -30,6 +30,9 @@ export const userData = createSlice({
       state.userStatus = UserStatusEnum.CONFIRMED;
       state.isUserDataPending = false;
     },
+    setUserStatus: (state: UserStore, action: PayloadAction<UserStatusEnum>) => {
+      state.userStatus = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchUserProfile.fulfilled, (state, action) => {
@@ -44,7 +47,7 @@ export const userData = createSlice({
       state.isUserDataPending = true;
     });
 
-    builder.addCase(fetchUserProfile.rejected, (state, action) => {
+    builder.addCase(fetchUserProfile.rejected, state => {
       state.isUserDataPending = false;
       state.userStatus = UserStatusEnum.REJECTED;
     });
@@ -52,4 +55,4 @@ export const userData = createSlice({
 });
 
 export type UserStoreData = ReturnType<typeof userData.reducer>;
-export const { setUserData } = userData.actions;
+export const { setUserData, setUserStatus } = userData.actions;

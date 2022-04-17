@@ -82,7 +82,7 @@ const RegisterPage = () => {
     <div className="full-screen-component-wrapper" onKeyPress={enterListener}>
       <CheckAuth>
         <div className="card-wrapper">
-          <div className="section-title">Sign up</div>
+          <div className="section-title">Rejstracja</div>
           <FormWrapper>
             <BaseInput
               value={login}
@@ -97,7 +97,7 @@ const RegisterPage = () => {
               value={password}
               setValue={setPassword}
               type="password"
-              label="Password"
+              label="Hasło"
               Icon={KeyIcon}
               showErrors={wasSubmitted}
               setErrorParrent={setIsPasswordCorrect}
@@ -107,7 +107,7 @@ const RegisterPage = () => {
               value={repeatPassword}
               setValue={setRepeatPassword}
               type="password"
-              label="Repeat password"
+              label="Powtórz hasło"
               Icon={KeyIcon}
               showErrors={wasSubmitted}
               setErrorParrent={setIsRepeatedPasswordCorrect}
@@ -117,7 +117,7 @@ const RegisterPage = () => {
             <BaseInput
               value={userName}
               setValue={setUserName}
-              label="Name"
+              label="Imię"
               Icon={AccessibilityNewIcon}
               showErrors={wasSubmitted}
               setErrorParrent={setIsNameCorrect}
@@ -126,20 +126,20 @@ const RegisterPage = () => {
             <BaseInput
               value={secretKey}
               setValue={setSercretKey}
-              label="Sercret key"
+              label="Klucz"
               Icon={QuestionMarkIcon}
               setErrorParrent={setIsSecretKeyCorrect}
               validationSettings={{ isRequired: true, maxLength: 50 }}
             />
             <div className="display-row section-margin">
               <BaseButton
-                text="login"
+                text="Logowanie"
                 onClick={onClickLoginBtn}
                 StartIcon={ArrowBackIcon}
                 position={PositionEnum.LEFT}
               />
               <BaseButton
-                text="register"
+                text="Zarejstruj"
                 onClick={onSubmit}
                 EndIcon={LoginIcon}
                 position={PositionEnum.RIGHT}

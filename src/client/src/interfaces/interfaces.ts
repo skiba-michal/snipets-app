@@ -1,6 +1,6 @@
-import {  VariantType } from "notistack";
+import { VariantType } from "notistack";
 
 export interface UserMessage {
-  type?: VariantType,
-  message?: string,
+  type?: VariantType;
+  message?: string;
 }

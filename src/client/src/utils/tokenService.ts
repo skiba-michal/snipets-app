@@ -9,5 +9,5 @@ export const setUserToken = (token: string) => {
 };
 
 export const removeUserToken = () => {
-  localStorage.setItem(tokenLocalStorageKey, '');
+  localStorage.removeItem(tokenLocalStorageKey);
 };

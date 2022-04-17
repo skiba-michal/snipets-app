@@ -1,0 +1,49 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+.the-drawer-wrapper {
+  .MuiPaper-root {
+    background-color: $secondary-color-lighten;
+  }
+  .show-hide-btn-wrapper {
+    margin-left: auto;
+    svg {
+      fill: $font-primary-color;
+      font-size: 34px;
+    }
+  }
+  .drawer-menu-wrapper {
+    .MuiAccordion-root {
+      margin-top: 10px;
+      .MuiAccordionDetails-root:first-of-type {
+        border-top: 1px solid $focus-color;
+      }
+    }
+    
+    .MuiAccordionSummary-content {
+      margin: 3px 0;
+      min-height: unset;
+    }
+    .MuiAccordionSummary-root {
+      margin: 10px 0;
+      min-height: unset !important;
+   
+    }
+    .MuiAccordionDetails-root {
+      border-top: 1px solid $border-color;
+    }
+ 
+    .menu-drawer-icon {
+      fill: $font-primary-color;
+      font-size: 34px;
+    }
+    .drawer-menu-title {
+      font-size: $font-medium; 
+      color: $font-primary-color;
+    }   
+    .drawer-menu-content {
+      font-size: $font-medium; 
+      color: $font-primary-color;
+    }
+  }
+}

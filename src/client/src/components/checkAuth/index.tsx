@@ -24,11 +24,11 @@ export const CheckAuth = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log(userStatus, 'eloooo')
+    console.log(userStatus)
     if (userStatus === UserStatusEnum.CONFIRMED) {
       navigate("/dashboard");
     }
-  }, [navigate, userStatus]);
+  }, [userStatus]);
 
   return <>{isUserDataPending || !checked ? <LoadingIcon sizeValue={SizeEnum.BIG} fullScreen /> : children}</>;
 };

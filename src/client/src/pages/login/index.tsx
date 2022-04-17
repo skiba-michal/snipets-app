@@ -61,7 +61,7 @@ const LoginPage = () => {
       <CheckAuth>
         <img src={logo} alt="Logo" className="logo" />
         <div className="card-wrapper">
-          <div className="section-title">Sign in</div>
+          <div className="section-title">Zaloguj się</div>
           <FormWrapper>
             <BaseInput
               value={login}
@@ -76,7 +76,7 @@ const LoginPage = () => {
               value={password}
               setValue={setPassword}
               type="password"
-              label="Password"
+              label="Hasło"
               Icon={KeyIcon}
               showErrors={wasSubmitted}
               setErrorParrent={setIsPasswordCorrect}
@@ -84,13 +84,13 @@ const LoginPage = () => {
             />
             <div className="display-row section-margin">
               <BaseButton
-                text="register"
+                text="rejstracja"
                 onClick={onClickResiterBtn}
                 StartIcon={ArrowBackIcon}
                 position={PositionEnum.LEFT}
               />
               <BaseButton
-                text="login"
+                text="logowanie"
                 onClick={onSubmit}
                 EndIcon={LoginIcon}
                 loading={loading}

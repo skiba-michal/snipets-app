@@ -33,6 +33,7 @@ body {
 
 .full-screen-component-wrapper {
   @include full-screen;
+  @include center;
 }
 
 .card-wrapper {

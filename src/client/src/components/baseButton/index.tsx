@@ -15,10 +15,12 @@ export const BaseButton = ({
   disabled = false,
   loading = false,
   position = PositionEnum.UNSET,
+  size = 'small'
 }: BaseButtonProps) => {
   return (
     <div className={`button-wrapper ${styleClass} ${position}`}>
       <Button
+        size={size}
         variant={variant}
         startIcon={StartIcon ? <StartIcon /> : null}
         endIcon={EndIcon && !loading ? <EndIcon /> : null}

@@ -29,43 +29,50 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
         throw error;
       }
       loadedUser = user;
-      return { isEqual: bcrypt.compare(password, user.password), user };
-    })
-    .then(data => {
-      const { isEqual, user } = data;
-      if (!isEqual) {
-        const error: RequestError = new Error(errorMessages.badLoginData);
-        error.statusCode = 401;
-        throw error;
-      }
-      const { token, refreshToken, userId } = createUserTokens(user);
 
-      res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        maxAge: 3.154e10, // 1 year
-      });
+      bcrypt
+        .compare(password, user.password)
+        .then(isEqual => {
+          if (!isEqual) {
+            const error: RequestError = new Error(errorMessages.badLoginData);
+            error.statusCode = 401;
+            throw error;
+          }
+          const { token, refreshToken, userId } = createUserTokens(loadedUser);
 
-      UserModel.updateOne(
-        { _id: userId },
-        {
-          $set: {
-            refreshToken: refreshToken,
-          },
-        }
-      )
-        .then(() => {
-          const response: RequestResponse<UserDataResponse> = {
-            message: succesMessages.logedIn,
-            data: {
-              name: loadedUser.name,
-              token: token,
-              permissions: loadedUser.permissions,
-              settings: loadedUser.settings,
-              id: userId,
-            },
-          };
+          res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            maxAge: 3.154e10, // 1 year
+          });
 
-          res.status(200).json(response);
+          UserModel.updateOne(
+            { _id: userId },
+            {
+              $set: {
+                refreshToken: refreshToken,
+              },
+            }
+          )
+            .then(() => {
+              const response: RequestResponse<UserDataResponse> = {
+                message: succesMessages.logedIn,
+                data: {
+                  name: loadedUser.name,
+                  token: token,
+                  permissions: loadedUser.permissions,
+                  settings: loadedUser.settings,
+                  id: userId,
+                },
+              };
+
+              res.status(200).json(response);
+            })
+            .catch(err => {
+              if (!err.statusCode) {
+                err.statusCode = 500;
+              }
+              next(err);
+            });
         })
         .catch(err => {
           if (!err.statusCode) {
@@ -194,6 +201,7 @@ export const logout = (req: AuthRequest, res: Response, next: NextFunction) => {
       data: null,
     };
 
+    res.clearCookie("refreshToken");
     res.status(200).json(response);
   });
 };

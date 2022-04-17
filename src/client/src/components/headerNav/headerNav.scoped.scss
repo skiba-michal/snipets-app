@@ -1,0 +1,51 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+.header-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: $secondary-color;
+  padding: 10px;
+  position: fixed;
+  .logo {
+    height: 60px;
+    width: 110px;
+  }
+  .navigation-wrapper {
+    display: flex;
+    .nav-link-wrapper {
+      a {
+        text-decoration: none;
+        color: $font-primary-color;
+      }
+      .nav-link-content {
+        height: 50px;
+        font-size: $font-medium-big;
+        padding: 0 10px;
+        @include center;
+        &:hover {
+          background-color: $secondary-color-lighten;
+        }
+      }
+    }
+    .active-link {
+      .nav-link-content {
+        background-color: $secondary-color-lighten;
+      }
+    }
+  }
+  .navigation-icons-wrapper {
+    @include center;
+    .nav-icon {
+      font-size: $font-big;
+      text-decoration: none;
+      color: $font-primary-color;
+      cursor: pointer;
+      &:hover {
+        color: $font-primary-color-darker
+      }
+    }
+  }
+}
