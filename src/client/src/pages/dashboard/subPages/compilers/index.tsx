@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import "./snipets.scoped.scss";
-
+import "./compilers.scoped.scss";
+import { Outlet } from "react-router";
 
 export const Compilers = () => {
-  return <div>compilers</div>;
+  return (
+    <div>
+      compilers <Outlet />
+    </div>
+  );
 };

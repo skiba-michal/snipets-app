@@ -16,7 +16,7 @@
     position: relative;
     .show-nav-btn {
       position: fixed;
-      background: $secondary-color-lighten;
+      background: $secondary-color;
       width: 35x;
       height: 35px;
       @include md {
@@ -24,24 +24,21 @@
         height: 50px;
       }
       svg {
-        color: $border-color;
+        color: $font-primary-color;
         font-size: 20px;
         @include md {
           font-size: 34px;
         }
       }
     }
-
     .open-dashboard {
       width: calc(100% - 240px);
       margin-left: 240px;
     }
-
     .close-dashboard {
       width: 100%;
       margin-left: 0;
     }
-
     .dashboard-content {
       transition: width 700ms, margin-left 700ms;
     }

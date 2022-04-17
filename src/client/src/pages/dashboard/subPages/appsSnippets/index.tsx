@@ -3,5 +3,5 @@ import "./appsSnippets.scoped.scss";
 
 
 export const AppsSnippets = () => {
-  return <div>InterviewQuestions</div>;
+  return <div>AppsSnippets</div>;
 };

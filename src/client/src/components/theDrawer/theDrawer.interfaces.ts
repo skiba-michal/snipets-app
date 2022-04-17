@@ -10,11 +10,16 @@ export interface DrawerContentMain {
   children: DrawerContentChild[];
 }
 
+export interface SimpleItem {
+
+}
+
 export interface TheDrawerProps {
   open: boolean;
   setOpen: (value: boolean) => void;
   drawerContent?: { // TODO: remove '?'
-    main: DrawerContentMain[];
+    main?: DrawerContentMain[];
+    simple?: DrawerContentChild[]
     footer?: {
       title: string;
       link: string;

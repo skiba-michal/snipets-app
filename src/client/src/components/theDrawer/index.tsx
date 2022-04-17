@@ -68,6 +68,10 @@ const drawerTest = {
       ],
     },
   ],
+  simple: [
+    { id: "1", title: "a", link: "/dashboard/snippets/add" },
+    { id: "2", title: "b", link: "/dashboard/snippets/add" },
+  ],
   footer: {
     title: "Dodaj nową kategorie",
     link: "/dashboard/snippets/add",
@@ -97,20 +101,29 @@ export const TheDrawer = ({ open, setOpen, drawerContent = drawerTest }: TheDraw
             <Accordion disableGutters className="display-none">
               <span />
             </Accordion>
-            {drawerContent.main.map(rowData => (
-              <Accordion disableGutters key={rowData.id}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon className="menu-drawer-icon" />}>
-                  <p className="drawer-menu-title">{rowData.title}</p>
-                </AccordionSummary>
-                {rowData.children.map(child => (
-                  <AccordionDetails key={child.id}>
-                    <NavLink to={child.link} className="drawer-nav-link">
-                      <p className="drawer-menu-content">{child.title}</p>
-                    </NavLink>
-                  </AccordionDetails>
-                ))}
-              </Accordion>
-            ))}
+            {drawerContent.main &&
+              drawerContent.main.map(rowData => (
+                <Accordion disableGutters key={rowData.id}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon className="menu-drawer-icon" />}>
+                    <p className="drawer-menu-title">{rowData.title}</p>
+                  </AccordionSummary>
+                  {rowData.children.map(child => (
+                    <AccordionDetails key={child.id}>
+                      <NavLink to={child.link} className="drawer-nav-link">
+                        <p className="drawer-menu-content">{child.title}</p>
+                      </NavLink>
+                    </AccordionDetails>
+                  ))}
+                </Accordion>
+              ))}
+            {drawerContent.simple &&
+              drawerContent.simple.map(simpleItem => (
+                <div className="drawer-item-simple">
+                  <NavLink to={simpleItem.link} className="drawer-nav-link">
+                    <p>{simpleItem.title}</p>
+                  </NavLink>
+                </div>
+              ))}
           </div>
         </div>
         {drawerContent.footer && (

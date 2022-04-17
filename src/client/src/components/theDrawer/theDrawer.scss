@@ -8,12 +8,15 @@
   .MuiDrawer-paper {
     top: 50px;
     width: 240px;
-    box-sizing: "border-box";
-    height: "calc(100% - 50px)";
-    overflow: "auto";
+    box-sizing: border-box;
+    height: calc(100vh - 50px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     @include md {
       top: 80px;
-      height: "calc(100% - 80px)";
+      height: calc(100vh - 80px);
     }
   }
   
@@ -21,7 +24,19 @@
     text-decoration: none;
     color: $font-primary-color;
   }
-
+  .drawer-item-simple {
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    padding: 0 $margin-small;
+    cursor: pointer;
+    &:hover {
+      background-color: $secondary-color-lighten;
+    }
+    margin: 5px 0;
+    border-top: 1px solid $border-color-dark-lighter;
+    border-bottom: 1.5px solid $border-color-dark;
+  }
   .MuiPaper-root {
     background-color: $secondary-color;
   }
@@ -82,7 +97,7 @@
   .drawer-menu-footer {
     cursor: pointer;
     border-top: 1px solid $border-color;
-    margin: auto 0px 1px;
+    margin: 10px 0px 1px;
     padding: $margin-small;
     font-size: $font-medium;
     display: flex;
