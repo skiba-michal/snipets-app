@@ -49,7 +49,7 @@ export const HeaderNav = () => {
           onClose={() => setOpenMobileMenu(false)}
         >
           {navigation.map(nav => (
-            <div className="nav-link-wrapper-mobile">
+            <div className="nav-link-wrapper-mobile" key={nav.title}>
               <NavLink to={nav.link} className={({ isActive }) => (isActive ? "active-link-mobile" : "")}>
                 <p className="nav-link-content-mobile">{nav.title}</p>
               </NavLink>
@@ -59,7 +59,7 @@ export const HeaderNav = () => {
       </div>
       <div className="navigation-wrapper">
         {navigation.map(nav => (
-          <div className="nav-link-wrapper">
+          <div className="nav-link-wrapper" key={nav.title}>
             <NavLink to={nav.link} className={({ isActive }) => (isActive ? "active-link" : "")}>
               <p className="nav-link-content">{nav.title}</p>
             </NavLink>

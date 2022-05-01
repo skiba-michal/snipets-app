@@ -1,3 +1,5 @@
+import { DialogTypeEnum } from "@interfaces";
+
 export interface DrawerContentChild {
   id: string;
   title: string;
@@ -7,22 +9,20 @@ export interface DrawerContentChild {
 export interface DrawerContentMain {
   id: string;
   title: string;
+  withAdd?: boolean;
   children: DrawerContentChild[];
-}
-
-export interface SimpleItem {
-
 }
 
 export interface TheDrawerProps {
   open: boolean;
   setOpen: (value: boolean) => void;
-  drawerContent?: { // TODO: remove '?'
+  openCreateDialog?: (type: DialogTypeEnum, title?: string) => void;
+  drawerContent?: {
+    // TODO: remove '?'
     main?: DrawerContentMain[];
-    simple?: DrawerContentChild[]
+    simple?: DrawerContentChild[];
     footer?: {
       title: string;
-      link: string;
     };
   };
 }

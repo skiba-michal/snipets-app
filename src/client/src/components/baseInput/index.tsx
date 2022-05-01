@@ -19,7 +19,7 @@ export const BaseInput = ({
   validationSettings = {},
   multiline = false,
   Icon,
-  width = null,
+  width = '',
 }: InputProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [readOnly, setReadOnly] = useState(true);
@@ -84,7 +84,7 @@ export const BaseInput = ({
   };
 
   return (
-    <FormControl className="form-control-wrapper" style={{ width: width ? `${width}px` : "" }}>
+    <FormControl className="form-control-wrapper" style={{ width: width ? width : "" }}>
       {label && <InputLabel classes={{ focused: "mui-label-focused", root: "mui-label-root" }}>{label}</InputLabel>}
       <Input
         value={value}

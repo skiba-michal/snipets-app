@@ -40,6 +40,8 @@
       margin-left: 0;
     }
     .dashboard-content {
+      height: 100%;
+      padding: $margin-big;
       transition: width 700ms, margin-left 700ms;
     }
   }

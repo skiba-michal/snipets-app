@@ -16,3 +16,20 @@ export enum UserStatusEnum {
   UNCONFIRMED = "unconfirmed",
   CONFIRMED = "confirmed",
 }
+
+export enum DialogTypeEnum {
+  CATEGORY = 'category',
+  ITEM = 'item',
+}
+
+export enum ModuleTypeEnum {
+  FAVORITE = 'FAVORITE',
+  SETTINGS = 'settings',
+  SNIPPETS = 'snippets',
+  SCIENCE = 'science',
+  APPSNIPPTES = 'appSnipets',
+  INTERVIEWQUESTIONS = 'interviewQuestions',
+  LANGUAGES = 'languages',
+  COMPILATORS = 'compilators',
+  GENERATORS = 'generators',
+}

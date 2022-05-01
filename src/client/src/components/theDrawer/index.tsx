@@ -6,12 +6,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import { TheDrawerProps } from "./theDrawer.interfaces";
 import "./theDrawer.scss";
+import { DialogTypeEnum } from "@interfaces";
 
 const drawerTest = {
   main: [
     {
       id: "1",
-      title: "Javascript",
+      title: "javascript",
+      withAdd: true,
       children: [
         {
           id: "21313",
@@ -27,7 +29,8 @@ const drawerTest = {
     },
     {
       id: "2",
-      title: "Scss",
+      title: "scss",
+      withAdd: true,
       children: [
         {
           id: "21313",
@@ -43,7 +46,8 @@ const drawerTest = {
     },
     {
       id: "3",
-      title: "Java",
+      title: "java",
+      withAdd: true,
       children: [
         {
           id: "3124",
@@ -74,11 +78,15 @@ const drawerTest = {
   ],
   footer: {
     title: "Dodaj nową kategorie",
-    link: "/dashboard/snippets/add",
   },
 };
 
-export const TheDrawer = ({ open, setOpen, drawerContent = drawerTest }: TheDrawerProps) => {
+export const TheDrawer = ({
+  open,
+  setOpen,
+  drawerContent = drawerTest,
+  openCreateDialog = () => {},
+}: TheDrawerProps) => {
   return (
     <div className="the-drawer-wrapper">
       <Drawer
@@ -109,17 +117,28 @@ export const TheDrawer = ({ open, setOpen, drawerContent = drawerTest }: TheDraw
                   </AccordionSummary>
                   {rowData.children.map(child => (
                     <AccordionDetails key={child.id}>
-                      <NavLink to={child.link} className="drawer-nav-link">
+                      <NavLink to={child.link} className="drawer-nav-item">
                         <p className="drawer-menu-content">{child.title}</p>
                       </NavLink>
                     </AccordionDetails>
                   ))}
+                  {rowData.withAdd && (
+                    <AccordionDetails>
+                      <div
+                        onClick={() => openCreateDialog(DialogTypeEnum.CATEGORY, rowData.title)}
+                        className="drawer-nav-item drawer-nav-item-with-icon"
+                      >
+                        <p className="drawer-menu-content">Add</p>
+                        <AddIcon />
+                      </div>
+                    </AccordionDetails>
+                  )}
                 </Accordion>
               ))}
             {drawerContent.simple &&
               drawerContent.simple.map(simpleItem => (
-                <div className="drawer-item-simple">
-                  <NavLink to={simpleItem.link} className="drawer-nav-link">
+                <div className="drawer-item-simple" key={simpleItem.id}>
+                  <NavLink to={simpleItem.link} className="drawer-nav-item">
                     <p>{simpleItem.title}</p>
                   </NavLink>
                 </div>
@@ -128,9 +147,14 @@ export const TheDrawer = ({ open, setOpen, drawerContent = drawerTest }: TheDraw
         </div>
         {drawerContent.footer && (
           <div className="drawer-menu-footer">
-            <NavLink to={drawerContent.footer.link} className="drawer-nav-link">
+            <div
+              className="drawer-nav-item"
+              onClick={() => {
+                openCreateDialog(DialogTypeEnum.CATEGORY);
+              }}
+            >
               <p>{drawerContent.footer.title}</p>
-            </NavLink>
+            </div>
             <AddIcon />
           </div>
         )}

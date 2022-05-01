@@ -8,3 +8,6 @@ export { CheckAuth } from './checkAuth'
 export { HeaderNav } from './headerNav'
 export type { CapatchaHandleRef } from './capatcha'
 export { TheDrawer} from './theDrawer';
+export { TextEditor } from './textEditor';
+export { CodeEditor } from './codeEditor';
+export { TheModal } from './theModal';

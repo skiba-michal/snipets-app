@@ -22,5 +22,5 @@ export interface InputProps {
   validationSettings?: ValidationSettings;
   multiline?: boolean;
   Icon?: MaterialIcon;
-  width?: number;
+  width?: string;
 }

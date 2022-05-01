@@ -15,10 +15,11 @@ export const BaseButton = ({
   disabled = false,
   loading = false,
   position = PositionEnum.UNSET,
-  size = 'small'
+  size = 'small',
+  buttonColorVariant = 'normal',
 }: BaseButtonProps) => {
   return (
-    <div className={`button-wrapper ${styleClass} ${position}`}>
+    <div className={`button-wrapper ${styleClass} ${position} ${buttonColorVariant}`}>
       <Button
         size={size}
         variant={variant}

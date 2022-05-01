@@ -3,7 +3,6 @@
 @import "@styles/mixins";
 @import "@styles/mediaQueries";
 
-
 .the-drawer-wrapper {
   .MuiDrawer-paper {
     top: 50px;
@@ -19,8 +18,8 @@
       height: calc(100vh - 80px);
     }
   }
-  
-  .drawer-nav-link {
+  .drawer-nav-item {
+    cursor: pointer;
     text-decoration: none;
     color: $font-primary-color;
   }
@@ -77,6 +76,12 @@
         background-color: $secondary-color-lighten;
       }
     }
+    .drawer-nav-item-with-icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
     .drawer-menu-summary-empty-content {
       padding-top: 6px;
     }
@@ -85,6 +90,7 @@
       font-size: 34px;
     }
     .drawer-menu-title {
+      text-transform: capitalize;
       font-size: $font-medium;
       color: $font-primary-color;
     }

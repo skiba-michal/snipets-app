@@ -3,13 +3,26 @@
 
 .button-wrapper {
   margin: $margin-small;
-  button {
-    background-color: $secondary-color;
-    color: $font-primary-color;
-    max-height: 36.5px;
-    &:hover {
-      background-color: $secondary-color-lighten;
+  &.normal {
+    button {
+      background-color: $secondary-color;
+      color: $font-primary-color;
+      &:hover {
+        background-color: $secondary-color-lighten;
+      }
     }
+  }
+  &.dark {
+    button {
+      background-color: $primary-color;
+      color: $font-primary-color;
+      &:hover {
+        background-color: $secondary-color-lighten;
+      }
+    }
+  }
+  button {
+    max-height: 36.5px;
     &:disabled {
       background-color: $disabled-color;
     }

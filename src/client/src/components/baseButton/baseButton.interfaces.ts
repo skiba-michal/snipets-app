@@ -12,4 +12,5 @@ export interface BaseButtonProps {
   StartIcon?: MaterialIcon;
   EndIcon?: MaterialIcon;
   size?: "small" | "medium" | "large";
+  buttonColorVariant?: 'normal' | 'dark';
 }

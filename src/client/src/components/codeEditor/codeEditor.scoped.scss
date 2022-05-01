@@ -1,0 +1,22 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+.code-editor-wrapper {
+  margin: $margin-big;
+  .code-editor {
+    max-height: 800px;
+    overflow-x: auto;
+  }
+  .code-editor-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+.code-editor-wrapper-edit-mode {
+  .code-editor {
+    border: 1px solid $focus-color;
+    margin: -1px;
+  }
+}
