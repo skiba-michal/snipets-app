@@ -16,7 +16,7 @@ export interface DrawerContentMain {
 export interface TheDrawerProps {
   open: boolean;
   setOpen: (value: boolean) => void;
-  openCreateDialog?: (type: DialogTypeEnum, title?: string) => void;
+  openManageDataModal?: (type: DialogTypeEnum, title?: string) => void;
   drawerContent?: {
     // TODO: remove '?'
     main?: DrawerContentMain[];

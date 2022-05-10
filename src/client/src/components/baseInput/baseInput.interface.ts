@@ -1,4 +1,5 @@
 import { MaterialIcon } from "@interfaces";
+import { InputBaseComponentProps } from "@mui/material";
 import { ChangeEvent } from "react";
 
 export interface ValidationSettings {
@@ -7,7 +8,7 @@ export interface ValidationSettings {
   isRequired?: boolean;
 }
 
-export interface InputProps {
+export interface BaseInputProps {
   value: string | number;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   setErrorParrent?: (value: boolean) => void;
@@ -21,6 +22,9 @@ export interface InputProps {
   type?: string;
   validationSettings?: ValidationSettings;
   multiline?: boolean;
+  onFocus?: () => void;
+  onBlur?: () => void;
   Icon?: MaterialIcon;
   width?: string;
+  inputProps?: InputBaseComponentProps
 }

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Input, InputLabel, FormControl, FormHelperText } from "@mui/material";
-import { InputProps } from "./baseInput.interface";
+import { BaseInputProps } from "./baseInput.interface";
 import { inputErrors } from "@const";
 import "./baseInput.scoped.scss";
 
@@ -18,9 +18,12 @@ export const BaseInput = ({
   type = "text",
   validationSettings = {},
   multiline = false,
+  onFocus = () => {},
+  onBlur = () => {},
   Icon,
-  width = '',
-}: InputProps) => {
+  width = "",
+  inputProps,
+}: BaseInputProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [readOnly, setReadOnly] = useState(true);
 
@@ -83,6 +86,15 @@ export const BaseInput = ({
     }
   };
 
+  const onFocusInput = () => {
+    setReadOnly(false);
+    onFocus();
+  };
+
+  const onBlurInput = () => {
+    onBlur();
+  }
+
   return (
     <FormControl className="form-control-wrapper" style={{ width: width ? width : "" }}>
       {label && <InputLabel classes={{ focused: "mui-label-focused", root: "mui-label-root" }}>{label}</InputLabel>}
@@ -98,9 +110,11 @@ export const BaseInput = ({
           error: "mui-input-error",
         }}
         readOnly={readOnly}
-        onFocus={() => setReadOnly(false)}
+        onFocus={() => onFocusInput()}
+        onBlur={() => onBlurInput()}
         multiline={multiline}
         type={type}
+        inputProps={inputProps}
         error={showErrors && !!errorMessage}
         startAdornment={
           <>

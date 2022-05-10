@@ -25,7 +25,6 @@ import {
   LanguagesElement,
   Compilers,
   CompilersBoard,
-  CompilersElement,
   Generators,
   GeneratorsBoard,
   GeneratorsElement,
@@ -67,7 +66,6 @@ const App = () => {
             </Route>
             <Route path="compilers" element={<Compilers />}>
               <Route index={true} element={<CompilersBoard />} />
-              <Route path=":type" element={<CompilersElement />} />
             </Route>
             <Route path="generators" element={<Generators />}>
               <Route index={true} element={<GeneratorsBoard />} />

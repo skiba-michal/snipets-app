@@ -34,25 +34,36 @@
           height: 30px;
           font-size: $font-small;
           padding: 0 6px;
+          svg {
+            margin-right: 5px;
+            font-size: $font-small;
+          }
           @include center;
           @include lg {
             padding: 0 12px;
             font-size: $font-medium;
+            svg {
+              font-size: $font-medium;
+            }
           }
           @include xl {
             height: 50px;
             font-size: $font-medium-big;
+            svg {
+              font-size: $font-medium-big;
+            }
           }
           &:hover {
             background-color: $secondary-color-lighten;
           }
+          
         }
       }
       .active-link {
-  
         .nav-link-content {
           border-bottom: 1px solid $focus-color;
           background-color: $secondary-color-lighten;
+        
         }
       }
     }
@@ -109,6 +120,9 @@
       @include center;
       &:hover {
         background-color: $secondary-color-lighten;
+      }
+      svg {
+        margin-right: 5px;
       }
     }
     .active-link-mobile {

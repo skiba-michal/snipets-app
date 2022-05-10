@@ -8,11 +8,11 @@ import { Outlet } from "react-router";
 export const Compilers = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setDrawerData(ModuleTypeEnum.COMPILATORS))
+    dispatch(setDrawerData(ModuleTypeEnum.COMPILER))
   }, [dispatch])
   return (
     <div>
-      compilers <Outlet />
+      <Outlet />
     </div>
   );
 };

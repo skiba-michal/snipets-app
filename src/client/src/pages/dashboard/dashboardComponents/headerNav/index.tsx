@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import StarIcon from "@mui/icons-material/Star";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import { IconButton, Menu, Tooltip } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,10 +16,11 @@ import { setUserStatus } from "@store/user/user.reducer";
 import { UserStatusEnum } from "@interfaces";
 import { useDispatch } from "react-redux";
 import { navigation } from "./navData";
+import { HeaderNavProps } from "./headerNav.interface";
 
 const baseDashboardRoute = "/dashboard";
 
-export const HeaderNav = () => {
+export const HeaderNav = ({ onClickSettings, onClickSearch }: HeaderNavProps) => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const anchorElement = document.getElementById("basic-button");
@@ -51,7 +52,7 @@ export const HeaderNav = () => {
           {navigation.map(nav => (
             <div className="nav-link-wrapper-mobile" key={nav.title}>
               <NavLink to={nav.link} className={({ isActive }) => (isActive ? "active-link-mobile" : "")}>
-                <p className="nav-link-content-mobile">{nav.title}</p>
+                <p className="nav-link-content-mobile"><nav.icon />{nav.title}</p>
               </NavLink>
             </div>
           ))}
@@ -61,19 +62,19 @@ export const HeaderNav = () => {
         {navigation.map(nav => (
           <div className="nav-link-wrapper" key={nav.title}>
             <NavLink to={nav.link} className={({ isActive }) => (isActive ? "active-link" : "")}>
-              <p className="nav-link-content">{nav.title}</p>
+              <p className="nav-link-content"><nav.icon />{nav.title}</p>
+          
             </NavLink>
           </div>
         ))}
       </div>
       <div className="navigation-icons-wrapper">
-        <NavLink end to={`${baseDashboardRoute}`}>
-          <Tooltip title="Szukaj">
-            <IconButton>
-              <SearchIcon className="nav-icon" />
-            </IconButton>
-          </Tooltip>
-        </NavLink>
+        <Tooltip title="Szukaj">
+          <IconButton onClick={onClickSearch}>
+            <SearchIcon className="nav-icon" />
+          </IconButton>
+        </Tooltip>
+
         <NavLink end to={`${baseDashboardRoute}`}>
           <Tooltip title="Ulubione">
             <IconButton>
@@ -81,13 +82,13 @@ export const HeaderNav = () => {
             </IconButton>
           </Tooltip>
         </NavLink>
-        <NavLink end to={`${baseDashboardRoute}/settings`}>
-          <Tooltip title="Ustawienia">
-            <IconButton>
-              <SettingsIcon className="nav-icon" />
-            </IconButton>
-          </Tooltip>
-        </NavLink>
+
+        <Tooltip title="Ustawienia" onClick={onClickSettings}>
+          <IconButton>
+            <SettingsIcon className="nav-icon" />
+          </IconButton>
+        </Tooltip>
+
         <Tooltip title="Wyloguj">
           <IconButton onClick={logoutUser}>
             <ExitToAppIcon className="nav-icon" />

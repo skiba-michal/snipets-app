@@ -89,3 +89,9 @@ body {
 .mui-input {
   padding: 5px !important;
 }
+
+.Mui-disabled {
+  .MuiFormControlLabel-label {
+    color: $disabled-color !important;
+  }
+}

@@ -19,6 +19,7 @@ export const TheModal = ({
   loadingBtn = false,
   loading = false,
 }: TheModalProps) => {
+
   const handleClose = () => {
     onClose();
     setOpen(false);
@@ -44,6 +45,7 @@ export const TheModal = ({
                 <BaseButton
                   text={mainBtnText}
                   onClick={onMainBtnClick}
+                  disabled={loadingBtn}
                   EndIcon={SaveIcon}
                   loading={loadingBtn}
                   buttonColorVariant="dark"

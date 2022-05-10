@@ -85,7 +85,7 @@ export const TheDrawer = ({
   open,
   setOpen,
   drawerContent = drawerTest,
-  openCreateDialog = () => {},
+  openManageDataModal = () => {},
 }: TheDrawerProps) => {
   return (
     <div className="the-drawer-wrapper">
@@ -125,7 +125,7 @@ export const TheDrawer = ({
                   {rowData.withAdd && (
                     <AccordionDetails>
                       <div
-                        onClick={() => openCreateDialog(DialogTypeEnum.CATEGORY, rowData.title)}
+                        onClick={() => openManageDataModal(DialogTypeEnum.ELEMENT, rowData.title)}
                         className="drawer-nav-item drawer-nav-item-with-icon"
                       >
                         <p className="drawer-menu-content">Add</p>
@@ -146,13 +146,13 @@ export const TheDrawer = ({
           </div>
         </div>
         {drawerContent.footer && (
-          <div className="drawer-menu-footer">
-            <div
-              className="drawer-nav-item"
-              onClick={() => {
-                openCreateDialog(DialogTypeEnum.CATEGORY);
-              }}
-            >
+          <div
+            className="drawer-menu-footer"
+            onClick={() => {
+              openManageDataModal(DialogTypeEnum.CATEGORY);
+            }}
+          >
+            <div className="drawer-nav-item">
               <p>{drawerContent.footer.title}</p>
             </div>
             <AddIcon />

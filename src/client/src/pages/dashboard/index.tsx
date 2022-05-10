@@ -1,49 +1,61 @@
 import React, { useEffect, useState } from "react";
-import "./dashboard.scoped.scss";
-import { HeaderNav, TheDrawer } from "@components";
 import { IconButton } from "@mui/material";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { Outlet, useLocation, useParams } from "react-router";
+import { Outlet } from "react-router";
 import { useShowDrawer } from "@hooks";
+import { DialogTypeEnum } from "@interfaces";
+import { ModalDataManageController, ModalSettings, ModalSearchData, HeaderNav, TheDrawer } from "./dashboardComponents";
+import "./dashboard.scoped.scss";
 
 const Dashboard = () => {
-  const [open, setOpen] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openManageDataModal, setOpenManageDataModal] = useState(false);
+  const [openSettingsModal, setOpenSettingsModal] = useState(false);
+  const [openSearchModal, setOpenSearchModal] = useState(false);
+  const [editElementId, setEditElementId] = useState("");
+  const [elementTitle, setElementTitle] = useState("");
+  const [elementType, setElementType] = useState<DialogTypeEnum | null>(null);
   const showDrawer = useShowDrawer();
 
   useEffect(() => {
     if (!showDrawer) {
-      setOpen(false);
+      setOpenDrawer(false);
     }
-  }, [showDrawer])
-  // const location = useLocation();
-  // const params = useParams();
-  // useEffect(() => {
-  //   const { pathname } = location;
-  //   console.log(pathname)
-  //   console.log(location)
-  //   console.log(params)
-  // }, [])
-  // const dispatch = useDispatch();
-  // const fetchAccount = () => {
-  //   dispatch(fetchUserProfile(null));
-  // };
+  }, [showDrawer]);
+
+  const onOpenManageDataModal = (dialogType: DialogTypeEnum, title?: string) => {
+    setElementType(dialogType);
+    setElementTitle(title || "");
+
+    setOpenManageDataModal(true);
+  };
 
   return (
     <div className="dashboard-wrapper">
-      <HeaderNav />
+      <HeaderNav onClickSearch={() => setOpenSearchModal(true)} onClickSettings={() => setOpenSettingsModal(true)} />
       <div className="dashboard-content-wrapper">
         {showDrawer && (
           <div className="show-nav-btn">
-            <IconButton onClick={() => setOpen(!open)}>
+            <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
               <ArrowCircleRightIcon />
             </IconButton>
           </div>
         )}
-        <TheDrawer setOpen={setOpen} open={open} />
-        <div className={`dashboard-content ${open ? "open-dashboard" : "close-dashboard"}`}>
+        <TheDrawer setOpen={setOpenDrawer} open={openDrawer} openManageDataModal={onOpenManageDataModal} />
+        <div className={`dashboard-content ${openDrawer ? "open-dashboard" : "close-dashboard"}`}>
           <Outlet />
         </div>
       </div>
+
+      <ModalDataManageController
+        editElementId={editElementId}
+        title={elementTitle}
+        dialogType={elementType}
+        setOpenModal={setOpenManageDataModal}
+        openModal={openManageDataModal}
+      />
+      <ModalSettings open={openSettingsModal} setOpen={setOpenSettingsModal} />
+      <ModalSearchData open={openSearchModal} setOpen={setOpenSearchModal} />
     </div>
   );
 };

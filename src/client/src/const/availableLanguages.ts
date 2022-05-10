@@ -857,14 +857,6 @@ export const availableLanguages = [
     label: "purebasic",
   },
   {
-    value: "pbfasm",
-    label: "purebasic",
-  },
-  {
-    value: "pbfasm",
-    label: "purebasic",
-  },
-  {
     value: "purescript",
     label: "purs",
   },

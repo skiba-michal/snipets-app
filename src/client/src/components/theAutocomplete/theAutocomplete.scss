@@ -1,0 +1,81 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+.auto-complete-wrapper {
+  position: relative;
+
+  .MuiInputLabel-root {
+    color: $font-primary-color !important;
+    padding-left: 8px !important;
+    
+  }
+
+  .MuiInputLabel-root.Mui-focused {
+    color: $focus-color !important;
+  }
+  
+  .MuiInput-underline {
+    color: $font-primary-color !important;
+    background: $secondary-color !important;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    padding-left: 3px !important;
+  }
+
+  .MuiInput-input {
+    padding-left: 3px !important;
+  }
+
+  .mui-input {
+    svg {
+      fill: $font-primary-color;
+    }
+  }
+
+  .MuiInput-underline:not(.Mui-error) {
+    &::before {
+      border-bottom: 2px solid $border-color !important;
+    }
+    &::after {
+      border-bottom: 2px solid $focus-color !important;
+    }
+  }
+  
+  .Mui-error::before {
+    border-bottom: 2px solid $error-color !important;
+  }
+  
+  .mui-label-root {
+    color: $font-primary-color !important;
+    font-size: $font-medium !important;
+    left: 0 !important;
+  }
+  
+  .mui-label-focused {
+    color: $font-primary-color !important;
+  }
+  
+  .MuiFormHelperText-root {
+    position: absolute;
+    top: 65px;
+    left: 5px;
+    font-size: $font-extra-small;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .form-control-wrapper {
+    width: 280px;
+    margin: 15px 10px;
+  }
+  
+}
+.autocomplete-paper {
+  background-color: $secondary-color-lighten !important;
+  color: $font-primary-color !important;
+}
+.autocomplete-no-options {
+  background-color: $secondary-color-lighten !important;
+  color: $font-primary-color !important;
+}

@@ -19,7 +19,7 @@ export enum UserStatusEnum {
 
 export enum DialogTypeEnum {
   CATEGORY = 'category',
-  ITEM = 'item',
+  ELEMENT = 'element',
 }
 
 export enum ModuleTypeEnum {
@@ -30,6 +30,6 @@ export enum ModuleTypeEnum {
   APPSNIPPTES = 'appSnipets',
   INTERVIEWQUESTIONS = 'interviewQuestions',
   LANGUAGES = 'languages',
-  COMPILATORS = 'compilators',
+  COMPILER = 'COMPILER',
   GENERATORS = 'generators',
 }
