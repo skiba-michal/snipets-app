@@ -33,10 +33,3 @@ const UserSchema = new Schema({
 });
 
 export const UserModel = mongoose.model("User", UserSchema);
-// Example of ref
-// posts: [
-//   {
-//     type: Schema.Types.ObjectId,
-//     ref: 'Posts'
-//   }
-// ]

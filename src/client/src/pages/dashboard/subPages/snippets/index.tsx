@@ -14,7 +14,6 @@ export const Snippets = () => {
   
   return (
     <div className="snipets-wrapper">
-        ff
       <Outlet />
     </div>
   );

@@ -7,12 +7,13 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { LoadingIcon } from "@components";
+import { AppDispatch } from "@store/index";
 
 export const CheckAuth = ({ children }) => {
   const [checked, setChecked] = useState(false);
   const { userStatus, isUserDataPending } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const isToken = getUserToken();

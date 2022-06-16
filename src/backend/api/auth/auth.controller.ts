@@ -134,11 +134,13 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
 export const refreshToken = (req: Request, res: Response, next: NextFunction) => {
   const cookies = req.cookies;
   const refreshToken = cookies.refreshToken;
+  
   if (!refreshToken) {
     const error: RequestError = new Error(errorMessages.notAuthenticated);
     error.statusCode = 401;
     throw error;
   }
+
   try {
     jwt.verify(refreshToken, process.env.REFRESH_HASH_KEY);
   } catch (err) {

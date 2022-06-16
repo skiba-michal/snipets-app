@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Input, InputLabel, FormControl, FormHelperText } from "@mui/material";
 import { BaseInputProps } from "./baseInput.interface";
-import { inputErrors } from "@const";
+import { inputErrors, testIsBasicCharacters } from "@const";
 import "./baseInput.scoped.scss";
 
 export const BaseInput = ({
@@ -44,6 +44,7 @@ export const BaseInput = ({
   const validateValue = (value: string | number): boolean => {
     const { maxLength } = validationSettings;
     const isMaxLengthIncorrent = maxLength ? value.toString().length > maxLength : false;
+    
     findAndSetErrorValue(value);
 
     if (isMaxLengthIncorrent) {
@@ -54,7 +55,7 @@ export const BaseInput = ({
   };
 
   const findAndSetErrorValue = (value: string | number) => {
-    const { minLength, isRequired } = validationSettings;
+    const { basicCharacters, minLength, isRequired } = validationSettings;
 
     if (!value.toString() && isRequired) {
       setErrorMessage(inputErrors.isRequired);
@@ -69,6 +70,13 @@ export const BaseInput = ({
     const isMinLengthIncorrect = minLength ? value.toString().length < minLength : false;
     if (isMinLengthIncorrect) {
       setErrorMessage(inputErrors.minLengthValue(validationSettings.minLength));
+      return;
+    }
+
+    const basicCharactersIncorrect = basicCharacters ? !value.toString().match(testIsBasicCharacters) : false;
+
+    if (basicCharactersIncorrect) {
+      setErrorMessage(inputErrors.wrongBasicCharacters);
       return;
     }
     setErrorMessage("");
@@ -93,7 +101,7 @@ export const BaseInput = ({
 
   const onBlurInput = () => {
     onBlur();
-  }
+  };
 
   return (
     <FormControl className="form-control-wrapper" style={{ width: width ? width : "" }}>

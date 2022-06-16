@@ -57,10 +57,3 @@ const UserSchema = new mongoose_1.Schema({
     }
 });
 exports.UserModel = mongoose_1.default.model("User", UserSchema);
-// Example of ref
-// posts: [
-//   {
-//     type: Schema.Types.ObjectId,
-//     ref: 'Posts'
-//   }
-// ]

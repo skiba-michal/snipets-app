@@ -1,0 +1,16 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+.snipets-wrapper {
+  width: 100%;
+  padding: $margin-medium;
+  .display-comlumn {
+    width: 100%;
+  }
+  .checxbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: $margin-small;
+  }
+}

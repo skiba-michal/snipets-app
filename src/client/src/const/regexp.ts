@@ -1,0 +1,1 @@
+export const testIsBasicCharacters = /^[a-zA-Z0-9_-]+$/g;

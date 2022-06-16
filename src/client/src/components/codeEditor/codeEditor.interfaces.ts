@@ -7,4 +7,9 @@ export interface CodeEditorProps {
   placeholder?: string
   onSave?: () => void;
   saveIsPending?: boolean;
+  copyBtn?: boolean;
+  editBtn?: boolean;
+  saveBtn?: boolean;
+  label?: string;
+  minHeight?: number | string;
 }

@@ -1,23 +1,27 @@
 export const validationMessages = Object.freeze({
-  loginExist: "Login already exist",
-  toShortPassword: "The password should be at least six characters long",
-  toShortLogin: "The login should be at least six characters long",
-  isRequired: "Value is required",
-  validationFailed: "Validation failed",
-  secretKeyIsInvalid: "Wrong secret key",
+  loginExist: "Login jest już zajęty",
+  toShortPassword: "Hasło musi mieć przynajmniej sześć znaków",
+  toShortLogin: "Login musi mieć przynajmniej sześć znaków",
+  isRequired: "Wartość jest niezbędna",
+  validationFailed: "Błąd walidacji",
+  secretKeyIsInvalid: "Niepoprawny klucz",
 });
 
 export const errorMessages = Object.freeze({
-  userNotFound: "User not found",
-  badLoginData: "Wrong login or password",
-  notAuthenticated: "Not authenticated",
-  tokenExpired: "The token has expired, please login again",
-  notFound: "Not found",
-  corsBlocked: "Not allowed by CORS",
+  userNotFound: "Użytkownik nie został znaleziony",
+  badLoginData: "Zły login albo hasło",
+  notAuthenticated: "Nie zautoryzowany",
+  tokenExpired: "Token wygasł, zaloguj się ponownie",
+  notFound: "Nie znaleziono",
+  corsBlocked: "Zablokowano przez korsy",
+  incorectData: "Niepoprawne dane",
+  categoryNotFound: "Kategoria nie została znaleziona",
 });
 
 export const succesMessages = Object.freeze({
-  userCreated: "User created!",
-  logedIn: "You are loged in",
-  logedOut: "You are loged out"
+  userCreated: "Użytkownik został stworzony!",
+  logedIn: "Zalogowano",
+  logedOut: "Wylogowano",
+  categoryCreated: "Kategoria została stworzona",
+  snipetCreated: "Snipet został stworzony",
 });

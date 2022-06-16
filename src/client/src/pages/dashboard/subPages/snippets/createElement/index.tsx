@@ -8,7 +8,7 @@ export const SnippetsCreateElement = ({
   data,
   setData,
   formWasSubmitted,
-  setFormWasSubmitted,
+  setIsError,
 }: SnippetsCreateElementProps) => {
   return <div className="snipets-wrapper">Element create {title}</div>;
 };

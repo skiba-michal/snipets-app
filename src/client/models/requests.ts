@@ -13,3 +13,9 @@ export interface RequestResponse<T> {
   message?: string;
   data?: T;
 }
+
+export interface CreatedBy {
+  userId: string;
+  userName: string;
+  date: string;
+}

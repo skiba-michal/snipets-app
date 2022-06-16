@@ -9,6 +9,8 @@ import todosRoutes from "./src/backend/routes/todos";
 import authRoutes from "@api/auth/auth";
 import cors from "cors";
 import userDataRoutes from "@api/userData/userData";
+import compileRoutes from "@api/compile/compile";
+import snipetRoutes from "@api/snipets/snipets";
 import { RequestError } from "@models";
 import { errorMessages } from "@utils";
 import { errorHandler } from "@middlewares";
@@ -38,6 +40,9 @@ app.use((_, res, next) => {
 
 app.use("/api", authRoutes);
 app.use("/api", userDataRoutes);
+app.use("/api", compileRoutes);
+app.use("/api", snipetRoutes);
+
 app.use("/api", todosRoutes); // to del
 
 app.all("/api/*", () => {

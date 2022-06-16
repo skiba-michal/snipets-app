@@ -128,7 +128,7 @@ export const TheDrawer = ({
                         onClick={() => openManageDataModal(DialogTypeEnum.ELEMENT, rowData.title)}
                         className="drawer-nav-item drawer-nav-item-with-icon"
                       >
-                        <p className="drawer-menu-content">Add</p>
+                        <p className="drawer-menu-content">Dodaj</p>
                         <AddIcon />
                       </div>
                     </AccordionDetails>

@@ -5,8 +5,9 @@
       "@api/*": ["backend/api/*"],
       "@utils": ["backend/utils/index"],
       "@schemas": ["backend/schemas/index"],
+      "@const": ["backend/const/index"],
       "@middlewares": ["backend/middlewares/index"],
-      "@models": ["client/models/index"]
+      "@models": ["client/models/index"],
     },
     "target": "es6",
     "module": "commonjs",

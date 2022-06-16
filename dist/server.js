@@ -14,6 +14,8 @@ const todos_1 = __importDefault(require("./src/backend/routes/todos"));
 const auth_1 = __importDefault(require("@api/auth/auth"));
 const cors_1 = __importDefault(require("cors"));
 const userData_1 = __importDefault(require("@api/userData/userData"));
+const compile_1 = __importDefault(require("@api/compile/compile"));
+const snipets_1 = __importDefault(require("@api/snipets/snipets"));
 const _utils_1 = require("@utils");
 const _middlewares_1 = require("@middlewares");
 const app = (0, express_1.default)();
@@ -34,6 +36,8 @@ app.use((_, res, next) => {
 });
 app.use("/api", auth_1.default);
 app.use("/api", userData_1.default);
+app.use("/api", compile_1.default);
+app.use("/api", snipets_1.default);
 app.use("/api", todos_1.default); // to del
 app.all("/api/*", () => {
     const error = new Error(_utils_1.errorMessages.notFound);

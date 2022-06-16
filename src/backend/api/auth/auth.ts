@@ -34,4 +34,5 @@ router.post(
 );
 router.get(`/${apiStructure.auth.refreshToken}`, refreshToken);
 router.post(`/${apiStructure.auth.logout}`, isAuth, logout);
+
 export default router;

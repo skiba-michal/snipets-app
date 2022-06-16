@@ -1,5 +1,6 @@
 export const inputErrors = {
-  minLengthValue: (v: number) => `The minimum length of the value is ${v}`,
-  isRequired: "Value is required",
-  passwordsNotTheSame: "Password and repeated password is not the same",
+  minLengthValue: (v: number) => `Minimalna długość to ${v}`,
+  isRequired: "Wartość jest niezbędna",
+  passwordsNotTheSame: "Hasła nie są takie same",
+  wrongBasicCharacters: "Możesz użyć tylko liter a-z oraz znaków '-'  oraz  '_'"
 };

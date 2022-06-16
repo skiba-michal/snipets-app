@@ -10,4 +10,11 @@ export const apiStructure = {
   userData: {
     profile: "userData/profile",
   },
+  compile: {
+    compile: "compile/compileCode",
+  },
+  snipets: {
+    snipetsDetails: "snipets",
+    snipetsCategories: "snipets/categories",
+  },
 };

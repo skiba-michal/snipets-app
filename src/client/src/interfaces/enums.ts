@@ -23,13 +23,13 @@ export enum DialogTypeEnum {
 }
 
 export enum ModuleTypeEnum {
-  FAVORITE = 'FAVORITE',
+  FAVORITE = 'favorite',
   SETTINGS = 'settings',
   SNIPPETS = 'snippets',
   SCIENCE = 'science',
   APPSNIPPTES = 'appSnipets',
   INTERVIEWQUESTIONS = 'interviewQuestions',
   LANGUAGES = 'languages',
-  COMPILER = 'COMPILER',
+  COMPILER = 'compiler',
   GENERATORS = 'generators',
 }

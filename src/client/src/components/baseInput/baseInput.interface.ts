@@ -6,6 +6,7 @@ export interface ValidationSettings {
   minLength?: number;
   maxLength?: number;
   isRequired?: boolean;
+  basicCharacters?: boolean;
 }
 
 export interface BaseInputProps {

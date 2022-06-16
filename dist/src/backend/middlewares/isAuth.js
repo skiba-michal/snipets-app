@@ -36,6 +36,7 @@ const isAuth = (req, _res, next) => {
     }
     if ((0, _utils_1.isJwtPayload)(decodedToken)) {
         req.userId = decodedToken.userId;
+        req.userName = decodedToken.userName;
     }
     next();
 };

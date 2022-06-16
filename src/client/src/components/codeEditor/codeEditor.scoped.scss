@@ -4,6 +4,12 @@
 
 .code-editor-wrapper {
   margin: $margin-big;
+  .code-editor-label {
+    margin: $margin-small 0;
+    font-size: $font-medium-big;
+    color: $green-color;
+    text-transform: capitalize;
+  }
   .code-editor {
     max-height: 800px;
     overflow-x: auto;

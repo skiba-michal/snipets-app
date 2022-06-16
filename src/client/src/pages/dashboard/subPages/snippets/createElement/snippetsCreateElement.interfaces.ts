@@ -6,5 +6,5 @@ export interface SnippetsCreateElementProps {
   data?: CustomObject
   setData?: (v: CustomObject) => void;
   formWasSubmitted?: boolean;
-  setFormWasSubmitted?: (v: boolean) => void;
+  setIsError: (v: boolean) => void;
 }

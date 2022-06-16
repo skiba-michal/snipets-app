@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router";
 import { RootState } from "@store/rootReducer";
 import { fetchUserProfile } from "@store/user/user.thunks";
 import { getUserToken } from "@utils";
+import { AppDispatch } from "@store/index";
 import { SizeEnum, UserStatusEnum } from "@interfaces";
 import { LoadingIcon } from "../loadingIcon";
 
@@ -11,7 +12,7 @@ export const PrivateRoute = () => {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(null);
   const { userStatus, isUserDataPending } = useSelector((state: RootState) => state.user);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const isTokenStored = !!getUserToken();

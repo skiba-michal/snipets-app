@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { LoadingIcon } from "../loadingIcon";
-import { CodeEditorProps } from "./codeEditor.interfaces";
+import React, { useEffect, useState } from "react";
 import CodeEditorReact from "@uiw/react-textarea-code-editor";
 import EditIcon from "@mui/icons-material/Edit";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { BaseButton } from "../baseButton";
 import SaveIcon from "@mui/icons-material/Save";
+import { LoadingIcon } from "../loadingIcon";
+import { BaseButton } from "../baseButton";
+import { CodeEditorProps } from "./codeEditor.interfaces";
 import "./codeEditor.scoped.scss";
 
 export const CodeEditor = ({
@@ -15,8 +15,13 @@ export const CodeEditor = ({
   isLoading = false,
   language = "tsx",
   placeholder = "Pisz kodzik...",
-  onSave,
+  onSave = () => {},
   saveIsPending = false,
+  copyBtn = true,
+  editBtn = true,
+  saveBtn = true,
+  minHeight = 200,
+  label,
 }: CodeEditorProps) => {
   const [disabledEditor, setDisabledEditor] = useState(true);
 
@@ -24,11 +29,19 @@ export const CodeEditor = ({
     navigator.clipboard.writeText(value);
   };
 
+  useEffect(() => {
+    if (!editBtn) {
+      setDisabledEditor(false);
+    }
+  }, [editBtn]);
+
   return (
     <div
       className={`code-editor-wrapper ${!readonly && !disabledEditor ? "code-editor-wrapper-edit-mode" : ""}`}
       data-color-mode="dark"
     >
+      {label && <p className="code-editor-label">{label}</p>}
+
       {isLoading ? (
         <div>
           <LoadingIcon />
@@ -44,6 +57,7 @@ export const CodeEditor = ({
             padding={15}
             style={{
               fontSize: 14,
+              minHeight: minHeight,
               backgroundColor: "#212425",
               fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
             }}
@@ -51,25 +65,9 @@ export const CodeEditor = ({
         </div>
       )}
       <div className="code-editor-footer">
-        <BaseButton
-          text="skopiuj"
-          onClick={copyToUserStash}
-          EndIcon={ContentCopyIcon}
-          // position={PositionEnum.RIGHT}
-        />
-        <BaseButton
-          text="Edytuj"
-          onClick={() => setDisabledEditor(!disabledEditor)}
-          EndIcon={EditIcon}
-          // position={PositionEnum.RIGHT}
-        />
-        <BaseButton
-          text="zapisz"
-          onClick={onSave}
-          EndIcon={SaveIcon}
-          loading={saveIsPending}
-          // position={PositionEnum.RIGHT}
-        />
+        {copyBtn && <BaseButton text="skopiuj" onClick={copyToUserStash} EndIcon={ContentCopyIcon} />}
+        {editBtn && <BaseButton text="Edytuj" onClick={() => setDisabledEditor(!disabledEditor)} EndIcon={EditIcon} />}
+        {saveBtn && <BaseButton text="zapisz" onClick={onSave} EndIcon={SaveIcon} loading={saveIsPending} />}
       </div>
     </div>
   );

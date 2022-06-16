@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from "react";
 import { TheModal } from "@components";
 import { CustomObject, DialogTypeEnum, ModuleTypeEnum } from "@interfaces";
@@ -15,6 +16,7 @@ import {
   InterviewQuestionsCreateCategory,
   LanguagesCreateCategory,
 } from "../../subPages";
+import { requestService } from "./requestsService";
 
 export const ModalDataManageController = ({
   title,
@@ -25,15 +27,17 @@ export const ModalDataManageController = ({
 }: ModalControllerProps) => {
   const { drawerData } = useSelector((state: RootState) => state.options);
   const [formWasSubmitted, setFormWasSubmitted] = useState(false);
-  const [data, setData] = useState<CustomObject>(null);
+  const [data, setData] = useState<CustomObject>({});
+  const [isError, setIsError] = useState(true);
   const [isFetchinData, setIsFetchingData] = useState(false);
   const [isSavindData, setIsSavindData] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 
   useEffect(() => {
-    setData(null);
+    setData({});
     setFormWasSubmitted(false);
     setIsSavindData(false);
+    setIsError(true);
     editElementId ? fetchData() : setIsFetchingData(false);
   }, [openModal, editElementId]);
 
@@ -45,20 +49,30 @@ export const ModalDataManageController = ({
     }, 1000);
   };
 
+  const onSavedCallback = () => {
+    setOpenModal(false);
+    setIsSavindData(false);
+  };
+
   const onSaveEditAction = () => {
-    setIsSavindData(true);
+    console.log(data, "DATA", isError, formWasSubmitted);
+    setFormWasSubmitted(true);
+    if (!isError) {
+      setIsSavindData(true);
+      requestService(dialogType, drawerData.module, data, onSavedCallback, editElementId);
+    }
   };
 
   const getSnippetComponent = () => {
     if (dialogType === DialogTypeEnum.CATEGORY) {
-      setModalTitle(editElementId ? "Stwórz kategorię snipetu" : "Edytuj kategorię");
+      setModalTitle(editElementId ? "Edytuj kategorię" : "Stwórz kategorię snipetu");
       return (
         <SnippetsCreateCategory
-          editElementId={editElementId}
           setData={setData}
           data={data}
-          setFormWasSubmitted={setFormWasSubmitted}
+          editElementId={editElementId}
           formWasSubmitted={formWasSubmitted}
+          setIsError={setIsError}
         />
       );
     } else if (dialogType === DialogTypeEnum.ELEMENT) {
@@ -69,8 +83,8 @@ export const ModalDataManageController = ({
           editElementId={editElementId}
           setData={setData}
           data={data}
-          setFormWasSubmitted={setFormWasSubmitted}
           formWasSubmitted={formWasSubmitted}
+          setIsError={setIsError}
         />
       );
     }
@@ -79,7 +93,7 @@ export const ModalDataManageController = ({
 
   const getScienceComponent = () => {
     if (dialogType === DialogTypeEnum.CATEGORY) {
-      setModalTitle(editElementId ? "Stwórz kategorię nauki" : "Edytuj kategorię");
+      setModalTitle(editElementId ? "Stwórz kategorię nauki" : `Edytuj kategorię`);
       return (
         <ScienceCreateCategory
           editElementId={editElementId}
@@ -133,7 +147,6 @@ export const ModalDataManageController = ({
     return <div>Error</div>;
   };
 
-
   const getAppSnippetsComponent = () => {
     if (dialogType === DialogTypeEnum.CATEGORY) {
       setModalTitle(editElementId ? "Stwórz kategorię snipetów dedykowanych do aplikacji" : "Edytuj kategorię");
@@ -161,7 +174,6 @@ export const ModalDataManageController = ({
     }
     return <div>Error</div>;
   };
-
 
   const getLanguageComponent = () => {
     if (dialogType === DialogTypeEnum.CATEGORY) {
@@ -204,7 +216,13 @@ export const ModalDataManageController = ({
     return <div>Error</div>;
   };
 
-  const memoizedComponent = useMemo(() => renderComponent(), [drawerData.module, dialogType, editElementId, openModal]);
+  const memoizedComponent = useMemo(() => renderComponent(), [
+    drawerData.module,
+    dialogType,
+    editElementId,
+    openModal,
+    formWasSubmitted,
+  ]);
 
   return (
     <TheModal

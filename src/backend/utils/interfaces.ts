@@ -3,3 +3,9 @@ export interface UserTokens {
   refreshToken: string;
   userId: string;
 }
+
+export interface ValidationStringOptions {
+  minLenght?: number;
+  maxLenght?: number;
+  basicCharactersOnly?: boolean;
+}

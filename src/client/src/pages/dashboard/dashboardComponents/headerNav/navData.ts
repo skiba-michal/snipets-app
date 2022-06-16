@@ -1,10 +1,10 @@
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import PsychologyIcon from '@mui/icons-material/Psychology';
-import ConstructionIcon from '@mui/icons-material/Construction';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import QuizIcon from '@mui/icons-material/Quiz';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import DataObjectIcon from '@mui/icons-material/DataObject';
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
+import PsychologyIcon from "@mui/icons-material/Psychology";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import QuizIcon from "@mui/icons-material/Quiz";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import DataObjectIcon from "@mui/icons-material/DataObject";
 
 const baseDashboardRoute = "/dashboard";
 export const navigation = [

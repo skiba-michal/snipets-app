@@ -1,3 +1,33 @@
+export const jsSelectValue = 'js';
+
+export const defaultAvailableLanguage = {
+  value: "js",
+  label: "javascript",
+};
+
+export const compilableLanguages = [
+  {
+    value: "js",
+    label: "javascript",
+  },
+  // {
+  //   value: "java",
+  //   label: "java",
+  // },
+  // {
+  //   value: "c",
+  //   label: "c",
+  // },
+  // {
+  //   value: "cpp",
+  //   label: "c++",
+  // },
+  // {
+  //   value: "py",
+  //   label: "python",
+  // }
+]
+
 export const availableLanguages = [
   {
     value: "ino",
@@ -21,7 +51,7 @@ export const availableLanguages = [
   },
   {
     value: "cpp",
-    label: "cpp",
+    label: "c++",
   },
   {
     value: "cs",

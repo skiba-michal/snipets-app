@@ -8,5 +8,5 @@ const store = configureStore({
 });
 
 export type Store = typeof store;
-
+export type AppDispatch = typeof store.dispatch;
 export default store;

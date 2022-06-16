@@ -1,5 +1,5 @@
 import { Response, NextFunction } from "express";
-import { AuthRequest, RequestError, RequestResponse, UserDataDb, UserData } from "@models";
+import { AuthRequest, RequestError, RequestResponse, UserData } from "@models";
 import { UserModel } from "@schemas";
 import { errorMessages } from "@utils";
 

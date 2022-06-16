@@ -8,6 +8,7 @@ export const useShowDrawer = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   
   useEffect(() => {
+    console.log(drawerData.module)
     setShowDrawer(!appSettings.moduleWithoutDrawer.includes(drawerData.module))
   }, [drawerData])
 

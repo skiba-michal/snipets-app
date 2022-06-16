@@ -1,6 +1,6 @@
 import React from "react";
 import { Autocomplete, FormHelperText, InputLabel, TextField } from "@mui/material";
-import { Option } from '@interfaces'
+import { Option } from "@interfaces";
 import { TheAutocompleteProps } from "./theAutocomplete.interface";
 import "./theAutocomplete.scss";
 
@@ -10,7 +10,9 @@ export const TheAutocomplete = ({
   options,
   errorMessage = "",
   showErrors = false,
-  label = ""
+  label = "",
+  clearIcon = false,
+  width = 300,
 }: TheAutocompleteProps) => {
   return (
     <div className="auto-complete-wrapper">
@@ -21,18 +23,19 @@ export const TheAutocomplete = ({
           setValue(newValue);
         }}
         classes={{
-          paper: 'autocomplete-paper',
-          noOptions: 'autocomplete-no-options'
+          paper: "autocomplete-paper",
+          noOptions: "autocomplete-no-options",
         }}
         isOptionEqualToValue={(option, value) => option.value === value.value}
         id="controllable-states-demo"
         noOptionsText="Brak opcji"
         options={options}
-        sx={{ width: 300 }}
+        clearIcon={clearIcon}
+        sx={{ width: width }}
         renderInput={params => (
           <TextField
             variant="standard"
-            error={showErrors && !! errorMessage}
+            error={showErrors && !!errorMessage}
             classes={{
               root: "mui-input",
             }}

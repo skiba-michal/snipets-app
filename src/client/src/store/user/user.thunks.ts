@@ -9,5 +9,5 @@ export const fetchUserProfile = buildAsyncThunk(
   async () => {
     const response: AxiosResponse<UserDataResponse> = await httpClient.get(apiStructure.userData.profile);
     return response.data;
-  }
+  }, 
 );

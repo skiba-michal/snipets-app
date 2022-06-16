@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const _models_1 = require("@models");
+const express_1 = require("express");
+const snipets_controller_1 = require("./snipets.controller");
+const _middlewares_1 = require("@middlewares");
+const router = (0, express_1.Router)({ strict: true });
+router.post(`/${_models_1.apiStructure.snipets.snipetsCategories}`, _middlewares_1.isAuth, snipets_controller_1.categoriesCreate);
+router.get(`/${_models_1.apiStructure.snipets.snipetsCategories}`, _middlewares_1.isAuth, snipets_controller_1.getSnipptsCategories);
+router.post(`/${_models_1.apiStructure.snipets.snipetsDetails}`, _middlewares_1.isAuth, snipets_controller_1.snipetCreate);
+exports.default = router;
