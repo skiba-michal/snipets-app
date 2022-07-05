@@ -25,4 +25,5 @@ exports.succesMessages = Object.freeze({
     logedOut: "Wylogowano",
     categoryCreated: "Kategoria została stworzona",
     snipetCreated: "Snipet został stworzony",
+    changesSaved: "Zmiany zostały zapisane"
 });

@@ -20,5 +20,5 @@ export const optionsData = createSlice({
   }
 });
 
-export type UserStoreData = ReturnType<typeof optionsData.reducer>;
+export type OptionsStoreData = ReturnType<typeof optionsData.reducer>;
 export const { setDrawerData } = optionsData.actions;

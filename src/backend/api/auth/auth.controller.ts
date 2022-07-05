@@ -28,7 +28,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
         error.statusCode = 401;
         throw error;
       }
-      loadedUser = user;
+      loadedUser = user as unknown as UserDataDb;
 
       bcrypt
         .compare(password, user.password)
@@ -134,7 +134,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
 export const refreshToken = (req: Request, res: Response, next: NextFunction) => {
   const cookies = req.cookies;
   const refreshToken = cookies.refreshToken;
-  
+
   if (!refreshToken) {
     const error: RequestError = new Error(errorMessages.notAuthenticated);
     error.statusCode = 401;
@@ -161,7 +161,7 @@ export const refreshToken = (req: Request, res: Response, next: NextFunction) =>
         error.statusCode = 401;
         throw error;
       }
-      const { token } = createUserTokens(user, true);
+      const { token } = createUserTokens(user as unknown as UserDataDb, true);
 
       const response: RequestResponse<RefreshTokenResponse> = {
         message: "",

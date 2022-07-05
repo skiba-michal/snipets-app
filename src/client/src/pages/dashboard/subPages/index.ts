@@ -35,5 +35,3 @@ export { GeneratorsBoard } from "./generators/board";
 export { GeneratorsElement } from "./generators/element";
 
 export { Favorite } from "./favorite";
-
-export { Settings } from "./settings";

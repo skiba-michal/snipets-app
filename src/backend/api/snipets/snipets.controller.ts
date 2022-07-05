@@ -11,7 +11,6 @@ import {
 } from "@models";
 import { errorMessages, succesMessages, validateString } from "@utils";
 import { SnipetCategoryModel, SnipetModel } from "@schemas";
-import { ObjectId } from "mongoose";
 
 export const categoriesCreate = (req: AuthRequest, res: Response, next: NextFunction) => {
   const body = req.body as SnipetCategoryCreateRequest;
@@ -63,7 +62,6 @@ export const snipetCreate = (req: AuthRequest, res: Response, next: NextFunction
   const currentDate = new Date();
 
   const currentDateFormated = currentDate.toISOString().substring(0, 10);
-  console.log(body.categoryId, 'elo')
 
   SnipetCategoryModel.findOne({ _id: body.categoryId }).then(category => {
     if (!category) {
@@ -90,7 +88,7 @@ export const snipetCreate = (req: AuthRequest, res: Response, next: NextFunction
     let createdSnipedId = "";
     snipet
       .save()
-      .then((snipedData: SnipetDB) => {
+      .then(snipedData => {
         createdSnipedId = snipedData._id.valueOf() as string;
         categoryChildren.push({
           name: body.name,
@@ -129,10 +127,10 @@ export const snipetCreate = (req: AuthRequest, res: Response, next: NextFunction
 
 export const getSnipptsCategories = (_req: AuthRequest, res: Response, next: NextFunction) => {
   SnipetCategoryModel.find({})
-    .then((snipets: SnipetCategory[]) => {
+    .then(snipets => {
       const response: RequestResponse<SnipetCategory[]> = {
         message: "",
-        data: snipets,
+        data: snipets as unknown as SnipetCategory[],
       };
       res.status(200).json(response);
     })

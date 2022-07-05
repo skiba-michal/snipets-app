@@ -14,13 +14,15 @@ import { httpClient, removeUserToken } from "@utils";
 import { apiStructure } from "@const";
 import { setUserStatus } from "@store/user/user.reducer";
 import { UserStatusEnum } from "@interfaces";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { navigation } from "./navData";
 import { HeaderNavProps } from "./headerNav.interface";
+import { RootState } from "@store/rootReducer";
 
 const baseDashboardRoute = "/dashboard";
 
 export const HeaderNav = ({ onClickSettings, onClickSearch }: HeaderNavProps) => {
+  const { userData } = useSelector((state: RootState) => state.user);
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const anchorElement = document.getElementById("basic-button");
@@ -49,21 +51,26 @@ export const HeaderNav = ({ onClickSettings, onClickSearch }: HeaderNavProps) =>
           open={openMobileMenu}
           onClose={() => setOpenMobileMenu(false)}
         >
-          {navigation.map(nav => (
+          {navigation.map(nav => userData.settings[nav.settingsPropName] && (
             <div className="nav-link-wrapper-mobile" key={nav.title}>
               <NavLink to={nav.link} className={({ isActive }) => (isActive ? "active-link-mobile" : "")}>
-                <p className="nav-link-content-mobile"><nav.icon />{nav.title}</p>
+                <p className="nav-link-content-mobile">
+                  <nav.icon />
+                  {nav.title}
+                </p>
               </NavLink>
             </div>
           ))}
         </Menu>
       </div>
       <div className="navigation-wrapper">
-        {navigation.map(nav => (
+        {navigation.map(nav => userData.settings[nav.settingsPropName] && (
           <div className="nav-link-wrapper" key={nav.title}>
             <NavLink to={nav.link} className={({ isActive }) => (isActive ? "active-link" : "")}>
-              <p className="nav-link-content"><nav.icon />{nav.title}</p>
-          
+              <p className="nav-link-content">
+                <nav.icon />
+                {nav.title}
+              </p>
             </NavLink>
           </div>
         ))}

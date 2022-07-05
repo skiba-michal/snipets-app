@@ -12,35 +12,42 @@ export const navigation = [
     link: `${baseDashboardRoute}/snippets`,
     title: "Snipety",
     icon: TextSnippetIcon,
+    settingsPropName: 'showSnippets'
   },
   {
     link: `${baseDashboardRoute}/science`,
     title: "Nauka",
     icon: PsychologyIcon,
+    settingsPropName: 'showScience'
   },
   {
     link: `${baseDashboardRoute}/apps-snippets`,
     title: "Projekty",
     icon: ConstructionIcon,
+    settingsPropName: 'showProjectSnippets'
   },
   {
     link: `${baseDashboardRoute}/interview-questions`,
     title: "Pytania rekrutacyjne",
     icon: QuestionAnswerIcon,
+    settingsPropName: 'showInterviewQuestions'
   },
   {
     link: `${baseDashboardRoute}/languages`,
     title: "Języki",
     icon: QuizIcon,
+    settingsPropName: 'showLanguages'
   },
   {
     link: `${baseDashboardRoute}/compilers`,
     title: "Komplitory",
     icon: AutorenewIcon,
+    settingsPropName: 'showCompilators'
   },
   {
     link: `${baseDashboardRoute}/generators`,
     title: "Generatory",
     icon: DataObjectIcon,
+    settingsPropName: 'showGenerators'
   },
 ];

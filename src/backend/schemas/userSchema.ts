@@ -22,13 +22,38 @@ const UserSchema = new Schema({
     default: [],
   },
   settings: {
-    default: {
-      showOnlyMyData: false,
-    },
     showOnlyMyData: {
       type: Boolean,
       default: false,
-    }
+    },
+    showSnippets: {
+      type: Boolean,
+      default: true,
+    },
+    showScience: {
+      type: Boolean,
+      default: true,
+    },
+    showProjectSnippets: {
+      type: Boolean,
+      default: true,
+    },
+    showInterviewQuestions: {
+      type: Boolean,
+      default: true,
+    },
+    showLanguages: {
+      type: Boolean,
+      default: true,
+    },
+    showCompilators: {
+      type: Boolean,
+      default: true,
+    },
+    showGenerators: {
+      type: Boolean,
+      default: true,
+    },
   }
 });
 

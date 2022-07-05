@@ -3,9 +3,9 @@ import SunEditor from "suneditor-react";
 import SunEditorCore from "suneditor/src/lib/core";
 import { LoadingIcon } from "@components";
 import { TextEditorProps } from "./textEditor.interfaces";
-import CodeMirror from "codemirror";
-import "codemirror/mode/htmlmixed/htmlmixed";
-import "codemirror/lib/codemirror.css";
+import {basicSetup} from "codemirror";
+// import "codemirror/mode/htmlmixed/htmlmixed";
+// import "codemirror/lib/codemirror.css";
 import "suneditor/dist/css/suneditor.min.css";
 import "./textEditor.scss";
 
@@ -34,7 +34,7 @@ export const TextEditor = ({ value = "", setValue = () => {}, isLoading = false 
           onChange={(value: string) => setValue(value)}
           resizingBar={false}
           setOptions={{
-            codeMirror: CodeMirror,
+      
             buttonList: [
               ["undo", "redo"],
               ["font", "fontSize"],

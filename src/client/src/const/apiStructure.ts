@@ -9,6 +9,7 @@ export const apiStructure = {
   },
   userData: {
     profile: "userData/profile",
+    settings: "userData/settings",
   },
   compile: {
     compile: "compile/compileCode",

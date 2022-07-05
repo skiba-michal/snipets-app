@@ -24,7 +24,6 @@ export enum DialogTypeEnum {
 
 export enum ModuleTypeEnum {
   FAVORITE = 'favorite',
-  SETTINGS = 'settings',
   SNIPPETS = 'snippets',
   SCIENCE = 'science',
   APPSNIPPTES = 'appSnipets',

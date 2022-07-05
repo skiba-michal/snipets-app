@@ -29,7 +29,6 @@ import {
   GeneratorsBoard,
   GeneratorsElement,
   Favorite,
-  Settings,
 } from "./pages/dashboard/subPages";
 
 const App = () => {
@@ -71,7 +70,6 @@ const App = () => {
               <Route index={true} element={<GeneratorsBoard />} />
               <Route path=":type" element={<GeneratorsElement />} />
             </Route>
-            <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />

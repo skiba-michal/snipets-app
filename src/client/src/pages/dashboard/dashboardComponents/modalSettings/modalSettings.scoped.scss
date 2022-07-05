@@ -1,0 +1,25 @@
+@import "@styles/colors";
+@import "@styles/variables";
+@import "@styles/mixins";
+
+
+.settings-wrapper {
+  .settings-form-wrapper {
+    display: flex;
+    gap: 15px;
+
+    .settings-form-col {
+      .title {
+        text-align: center;
+        border-bottom: 1px solid $border-color-grey-dark;
+        padding: 12px;
+        font-size: $font-medium-big;
+        margin-bottom: 8px;
+      }
+      display: flex;
+      width: 50%;
+      flex-direction: column;
+    }
+  }
+
+}

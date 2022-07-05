@@ -27,7 +27,7 @@ export const TheSwitch = ({ value, setValue, label = "", disabled = false }: The
 
   return (
     <FormControlLabel
-      control={<GreenSwitch value={value} onChange={handleChange} disabled={disabled} />}
+      control={<GreenSwitch checked={value} onChange={handleChange} disabled={disabled} />}
       label={label}
     />
   );

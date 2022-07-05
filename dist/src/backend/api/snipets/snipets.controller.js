@@ -48,7 +48,6 @@ const snipetCreate = (req, res, next) => {
     const body = req.query;
     const currentDate = new Date();
     const currentDateFormated = currentDate.toISOString().substring(0, 10);
-    console.log(body.categoryId, 'elo');
     _schemas_1.SnipetCategoryModel.findOne({ _id: body.categoryId }).then(category => {
         if (!category) {
             const error = new Error(_utils_1.errorMessages.categoryNotFound);
@@ -72,7 +71,7 @@ const snipetCreate = (req, res, next) => {
         let createdSnipedId = "";
         snipet
             .save()
-            .then((snipedData) => {
+            .then(snipedData => {
             createdSnipedId = snipedData._id.valueOf();
             categoryChildren.push({
                 name: body.name,
@@ -108,7 +107,7 @@ const snipetCreate = (req, res, next) => {
 exports.snipetCreate = snipetCreate;
 const getSnipptsCategories = (_req, res, next) => {
     _schemas_1.SnipetCategoryModel.find({})
-        .then((snipets) => {
+        .then(snipets => {
         const response = {
             message: "",
             data: snipets,

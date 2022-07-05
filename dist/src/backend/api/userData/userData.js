@@ -6,4 +6,5 @@ const userData_controller_1 = require("./userData.controller");
 const _middlewares_1 = require("@middlewares");
 const router = (0, express_1.Router)({ strict: true });
 router.get(`/${_models_1.apiStructure.userData.profile}`, _middlewares_1.isAuth, userData_controller_1.getUserProfile);
+router.post(`/${_models_1.apiStructure.userData.settings}`, _middlewares_1.isAuth, userData_controller_1.editUserSettings);
 exports.default = router;

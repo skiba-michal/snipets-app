@@ -26,6 +26,13 @@ export interface ResgisterData extends UserLoginData {
 
 export interface UserSettings {
   showOnlyMyData?: boolean;
+  showSnippets?: boolean;
+  showScience?: boolean;
+  showProjectSnippets?: boolean;
+  showInterviewQuestions?: boolean;
+  showLanguages?: boolean;
+  showCompilators?: boolean;
+  showGenerators?: boolean;
 }
 
 // Response
